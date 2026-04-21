@@ -23,11 +23,12 @@
 
   /* ── Jackpot bar ── */
   --color-jackpot-bg: #3d2010;
-  --color-jackpot-text: #ffd700;
+  --color-jackpot-text: #ffc434;
 
   /* ── Title plate ── */
   --color-title-bg: #5a3520;
-  --color-title-text: #ffd700;
+  --color-title-text: #ffc434;
+  --color-balance-shadow: #251a11;
 
   /* ── Slot machine ── */
   --color-reel-border: #7ec8e3;
@@ -39,6 +40,9 @@
   --color-win-amount: #22c55e;
   --color-lose-amount: #ef4444;
 
+  /* ── Fonts ── */
+  --font-poetsen: 'Poetsen One', sans-serif;
+
   /* ── Text ── */
   --color-text-muted: #7a8a5a;
   --color-text-white: #ffffff;
@@ -49,4 +53,43 @@
   --color-btn-nav-bg: #f7931e;
   --color-btn-nav-border: #d4761a;
   --color-btn-nav-shadow: #a05510;
+
+  /* ── Balance ── */
+  --color-balance-bg: #341d1a;
+  --color-balance-circle: #f7405e;
+  --color-balance-circle-text: #691010;
+}
+
+@utility text-title-outline {
+  -webkit-text-stroke: 8px var(--color-balance-shadow);
+  paint-order: stroke fill;
+  /* Centered shadows to create a thick uniform border/outline effect */
+  text-shadow:
+    0 0 2px var(--color-balance-shadow),
+    0 0 5px var(--color-balance-shadow);
+}
+
+@utility clip-balance {
+  clip-path: path(
+    'M 80,0 L 330,0 Q 360,0 371,28 L 399,95 Q 410,123 380,123 L 30,123 Q 0,123 11,95 L 39,28 Q 50,0 80,0 Z'
+  );
+}
+
+@utility wave-bottom {
+  -webkit-mask:
+    linear-gradient(-45deg, #000 10px, #0000 0) 0 100% / 20px 20px,
+    linear-gradient(45deg, #000 10px, #0000 0) 0 100% / 20px 20px,
+    linear-gradient(#000 0 0) 0 0 / 100% calc(100% - 10px) no-repeat;
+  mask:
+    linear-gradient(-45deg, #000 10px, #0000 0) 0 100% / 20px 20px,
+    linear-gradient(45deg, #000 10px, #0000 0) 0 100% / 20px 20px,
+    linear-gradient(#000 0 0) 0 0 / 100% calc(100% - 10px) no-repeat;
+}
+@utility text-3d-title {
+  -webkit-text-stroke: 6px var(--color-balance-shadow);
+  paint-order: stroke fill;
+  /* Hard 3D shadow for each letter */
+  text-shadow:
+    0 4px 0 var(--color-balance-shadow),
+    0 5px 10px rgba(0, 0, 0, 0.4);
 }

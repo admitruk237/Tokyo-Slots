@@ -1,13 +1,26 @@
-import headerSvg from '@/shared/assets/bg/header.svg';
-import citySvg from '@/shared/assets/bg/tokiocity.svg';
-import cloudSvg from '@/shared/assets/bg/cloud.svg';
+import { GameBackground } from '@/widgets/game-background/GameBackground';
+import { GameForeground } from '@/widgets/game-foreground/GameForeground';
+import { GameLogo } from '@/widgets/game-logo/GameLogo';
+import { HeaderBlock } from '@/widgets/header-block/HeaderBlock';
+import { BalanceDisplay } from '@/widgets/balance-display/BalanceDispaly';
+import { SpinButton } from '@/widgets/spin-button/SpinButton';
 
-export default function App() {
+const App = () => {
   return (
-    <div className="relative min-h-screen bg-linear-to-b from-bg-idle-from to-bg-idle-to overflow-hidden">
-      <img src={headerSvg} alt="" className="absolute top-0 left-0 w-full" />
-      <img src={citySvg} alt="" className="absolute left-0 w-full" style={{ bottom: '125.34px' }} />
-      <img src={cloudSvg} alt="" className="absolute bottom-0 left-0 w-full" />
+    <div className="relative min-h-screen bg-linear-to-b from-bg-idle-from to-bg-idle-to overflow-hidden flex flex-col items-center">
+      <GameBackground />
+      <HeaderBlock />
+      <GameLogo />
+      <div className="flex-1" />
+      <div className="relative z-10  mb-16">
+        <SpinButton />
+      </div>
+      <GameForeground />
+      <div className="relative z-30 w-full flex flex-col items-center">
+        <BalanceDisplay />
+      </div>
     </div>
   );
-}
+};
+
+export default App;
