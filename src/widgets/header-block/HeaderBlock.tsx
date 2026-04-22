@@ -1,7 +1,7 @@
 export const HeaderBlock = () => {
   return (
     <div className="relative w-full shrink-0">
-      <div className="w-full h-[60px] bg-[#fff6de]" />
+      <div className="w-full h-[98px] bg-[#fff6de]" />
 
       <svg
         className="absolute bottom-0 left-0 w-full"

@@ -24,7 +24,7 @@ const DECORATIONS = [
 
 export function BackgroundDecorations() {
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden z-50">
+    <div className="absolute inset-x-0 top-0 pointer-events-none overflow-hidden z-0 h-full">
       {DECORATIONS.map((item) => (
         <motion.div
           key={item.id}
