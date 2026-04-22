@@ -1,33 +1,21 @@
-import { useState } from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { useGameStore } from '@/entities/game/model/store';
+import { GAME_CONFIG } from '@/shared/config/gameConfig';
 import ballIcon from '@/shared/assets/slot-machine/ball.svg';
 import machineSvg from '@/shared/assets/slot-machine/slot-mashine.svg';
+import { SlotReel } from './ui/SlotReel';
+import { useSlotMachine } from './model/useSlotMachine';
+
+const REEL_CLASSES = [
+  'left-[53px] top-[107px]',
+  'left-[150px] top-[107px]',
+  'left-[246px] top-[107px]',
+  'left-[345px] top-[107px]',
+];
 
 export const SlotMachine = () => {
-  const [isPulled, setIsPulled] = useState(false);
-  const leverControls = useAnimation();
-
-  const handleLeverClick = async () => {
-    if (isPulled) return;
-    setIsPulled(true);
-
-    await leverControls.start({
-      rotateX: 90,
-      transition: { duration: 0.3, ease: 'easeIn' },
-    });
-
-    await leverControls.start({
-      rotateX: 160,
-      transition: { duration: 0.3, ease: 'easeOut' },
-    });
-
-    await leverControls.start({
-      rotateX: 0,
-      transition: { type: 'spring', stiffness: 120, damping: 20, mass: 1 },
-    });
-
-    setIsPulled(false);
-  };
+  const { nextReels } = useGameStore();
+  const { leverControls, reelsSpinning, handleReelStop } = useSlotMachine();
 
   return (
     <div className="relative flex items-center justify-center w-[483px] h-[297px]">
@@ -37,11 +25,19 @@ export const SlotMachine = () => {
         className="absolute inset-0 w-full h-full object-contain pointer-events-none z-0"
       />
 
-      <div className="absolute inset-0 pointer-events-none z-10">
-        <div className="absolute left-[51.7px] top-[78.9px] w-[80px] h-[142px] bg-white border-[3px] border-[#341D1A] rounded-[11px]" />
-        <div className="absolute left-[149.3px] top-[78.9px] w-[78.5px] h-[142px] bg-white border-[3px] border-[#341D1A] rounded-[11px]" />
-        <div className="absolute left-[245.5px] top-[78.9px] w-[80px] h-[142px] bg-white border-[3px] border-[#341D1A] rounded-[11px]" />
-        <div className="absolute left-[343.2px] top-[78.9px] w-[80px] h-[142px] bg-white border-[3px] border-[#341D1A] rounded-[11px]" />
+      <div className="absolute inset-0 z-10 pointer-events-none">
+        {Array(GAME_CONFIG.REELS_COUNT)
+          .fill(null)
+          .map((_, i) => (
+            <SlotReel
+              key={i}
+              className={REEL_CLASSES[i]}
+              isSpinning={reelsSpinning}
+              targetSymbolId={nextReels?.[i]}
+              delay={i * GAME_CONFIG.ANIMATION.REEL_DELAY}
+              onStop={handleReelStop}
+            />
+          ))}
       </div>
 
       <div className="absolute left-[450px] top-[147px] -translate-y-1/2 flex items-center z-20 select-none [perspective:1400px] [perspective-origin:center]">
@@ -58,7 +54,7 @@ export const SlotMachine = () => {
             <img
               src={ballIcon}
               alt="Lever ball"
-              className="absolute -top-[26px] left-1/2 -translate-x-1/2 w-[33px] min-w-[33px] h-[33px] min-h-[33px] max-w-none drop-shadow-xl z-100 [transform:translateZ(2px)]"
+              className="absolute -top-[26px] left-1/2 -translate-x-1/2 w-[33px] min-w-[33px] h-[33px] min-h-[33px] max-w-none drop-shadow-xl z-20 [transform:translateZ(2px)]"
             />
           </motion.div>
         </div>
