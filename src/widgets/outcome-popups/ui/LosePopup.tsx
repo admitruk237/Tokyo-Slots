@@ -1,13 +1,16 @@
 import { motion } from 'framer-motion';
+import CountUpLib from 'react-countup';
 import { useGameStore } from '@/entities/game/model/store';
 import { StrokeText } from '@/shared/ui/StrokeText/StrokeText';
 import { TokenIcon } from '@/shared/ui/TokenIcon/TokenIcon';
 import rectangleImg from '@/shared/assets/lose-over-lay/rectangle-2.svg';
 
+const CountUp = (CountUpLib as unknown as { default: typeof CountUpLib }).default || CountUpLib;
+
 export const LosePopup = () => {
   const { bet } = useGameStore();
 
-  const [whole, decimal] = bet.toFixed(2).split('.');
+  const [, decimal] = bet.toFixed(2).split('.');
 
   return (
     <motion.div
@@ -32,7 +35,7 @@ export const LosePopup = () => {
                 className="mr-4 border-[2px] border-balance-bg/50 shadow-win-icon"
               />
               <span className="font-poetsen font-bold text-lose-title text-2xl tracking-[0.15em] text-stroke-muted">
-                -{whole}
+                -<CountUp start={0} end={bet} duration={1.5} decimals={0} />
                 <span className="text-white opacity-50 text-2xl pl-1">.{decimal}</span>
               </span>
             </div>

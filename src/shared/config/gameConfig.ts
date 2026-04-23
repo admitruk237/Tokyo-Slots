@@ -3,20 +3,16 @@ export const GAME_CONFIG = {
   INITIAL_JACKPOT: 10000.0,
 
   BET: {
-    MIN: 0.1,
-    MAX: 100.0,
-    STEP: 0.1,
-    DEFAULT: 0.1,
-  },
-
-  JACKPOT: {
-    INCREASE_PERCENTAGE: 0.01,
+    MIN: 100,
+    MAX: 10000,
+    STEP: 100,
+    DEFAULT: 1000,
   },
 
   REELS_COUNT: 4,
 
   SYMBOLS: [
-    { id: 'seven', label: '7️⃣', weight: 1, multiplier: 100 },
+    { id: 'seven', label: '7️⃣', weight: 1, multiplier: 500 },
     { id: 'torii', label: '⛩️', weight: 3, multiplier: 50 },
     { id: 'maneki', label: '🐱', weight: 4, multiplier: 30 },
     { id: 'bell', label: '🔔', weight: 6, multiplier: 20 },

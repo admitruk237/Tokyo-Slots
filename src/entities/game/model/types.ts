@@ -17,7 +17,6 @@ export type GameSymbol = {
 export type GameState = {
   balance: number;
   bet: number;
-  jackpot: number;
   reels: string[];
   nextReels?: string[];
   status: GameStatus;

@@ -1,12 +1,16 @@
+import CountUpLib from 'react-countup';
 import { useGameStore } from '@/entities/game/model/store';
 import { cn } from '@/shared/lib/utils';
 import balanceIcon from '@/shared/assets/items/Balance.svg';
 import { TokenIcon } from '@/shared/ui/TokenIcon/TokenIcon';
 
+const CountUp = (CountUpLib as unknown as { default: typeof CountUpLib }).default || CountUpLib;
+
 export const BalanceDisplay = () => {
   const { balance } = useGameStore();
 
-  const [whole, decimal] = balance.toFixed(2).split('.');
+  const whole = Math.floor(balance);
+  const [, decimal] = balance.toFixed(2).split('.');
 
   return (
     <div className="relative z-10 mt-auto flex justify-center">
@@ -26,7 +30,7 @@ export const BalanceDisplay = () => {
           <TokenIcon />
 
           <span className="text-3xl text-white font-poetsen text-title-outline leading-none mt-1">
-            {whole}
+            <CountUp end={whole} duration={0.4} decimals={0} useGrouping={false} />
             <span className="opacity-50">.{decimal}</span>
           </span>
         </div>

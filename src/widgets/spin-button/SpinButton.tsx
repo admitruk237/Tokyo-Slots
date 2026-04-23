@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useGameStore } from '@/entities/game/model/store';
+import { GAME_STATUS } from '@/entities/game/model/types';
 import housingRim from '@/shared/assets/items/Subtract.svg';
 import housingBase from '@/shared/assets/items/Subtract-2.svg';
 import redCap from '@/shared/assets/items/Union.svg';
@@ -7,14 +8,18 @@ import redCap from '@/shared/assets/items/Union.svg';
 export const SpinButton = () => {
   const { startSpin, status, balance, bet } = useGameStore();
 
-  const isSpinning = status === 'spinning';
-  const canSpin = bet > 0 && balance >= bet && !isSpinning;
+  const isSpinning = status === GAME_STATUS.SPINNING;
+  const isAffordable = balance >= bet;
+  const hasValidBet = bet > 0;
+
+  const canAttemptSpin = !isSpinning;
+  const isDisabled = !isAffordable || !hasValidBet;
 
   return (
     <motion.button
       onClick={startSpin}
-      disabled={!canSpin}
-      className={`relative cursor-pointer select-none outline-none bg-transparent border-none p-0 flex items-center justify-center w-[250px] h-[151px] transition-opacity ${!canSpin ? 'opacity-80' : ''}`}
+      disabled={!canAttemptSpin}
+      className={`relative cursor-pointer select-none outline-none bg-transparent border-none p-0 flex items-center justify-center w-[250px] h-[151px] transition-opacity ${isDisabled && !isSpinning ? 'opacity-70 grayscale-[0.3]' : ''}`}
     >
       <img
         src={housingBase}
@@ -28,7 +33,7 @@ export const SpinButton = () => {
 
           <motion.div
             className="absolute flex items-center justify-center w-[196px] h-[83px] top-[10px] z-[20]"
-            whileTap={canSpin ? { y: 15 } : {}}
+            whileTap={canAttemptSpin ? { y: 15 } : {}}
             animate={isSpinning ? { y: 17, scale: 1.05 } : { y: 0, scale: 1 }}
             transition={{
               duration: 0.1,

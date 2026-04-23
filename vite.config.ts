@@ -16,4 +16,7 @@ export default defineConfig({
       '@shared': resolve(__dirname, 'src/shared'),
     },
   },
+  optimizeDeps: {
+    include: ['react-countup'],
+  },
 });

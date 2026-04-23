@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAnimation } from 'framer-motion';
 import { GAME_CONFIG } from '@/shared/config/gameConfig';
 import type { GameSymbol } from '@/entities/game/model/types';
@@ -14,8 +14,12 @@ export const useReelAnimation = ({ targetSymbolId, isSpinning, delay, onStop }: 
   const controls = useAnimation();
   const [currentSymbol, setCurrentSymbol] = useState<GameSymbol>(GAME_CONFIG.SYMBOLS[0]);
 
+  const wasSpinningRef = useRef(false);
+
   useEffect(() => {
     if (isSpinning && targetSymbolId) {
+      wasSpinningRef.current = true;
+
       const startAnimation = async () => {
         await new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -29,18 +33,18 @@ export const useReelAnimation = ({ targetSymbolId, isSpinning, delay, onStop }: 
         });
       };
       startAnimation();
-    } else if (!isSpinning && targetSymbolId) {
+    } else if (!isSpinning && targetSymbolId && wasSpinningRef.current) {
+      wasSpinningRef.current = false;
+
       const stopAnimation = async () => {
         const target =
           GAME_CONFIG.SYMBOLS.find((s) => s.id === targetSymbolId) || GAME_CONFIG.SYMBOLS[0];
+
         await controls.start({
-          y: [null, -100, 0],
+          y: 0,
           transition: {
-            duration: 0.5,
+            duration: 0.35,
             ease: 'easeOut',
-            type: 'spring',
-            stiffness: 100,
-            damping: 10,
           },
         });
 

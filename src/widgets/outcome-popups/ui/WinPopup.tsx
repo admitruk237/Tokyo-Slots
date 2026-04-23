@@ -1,14 +1,17 @@
 import { motion } from 'framer-motion';
+import CountUpLib from 'react-countup';
 import { useGameStore } from '@/entities/game/model/store';
 import { StrokeText } from '@/shared/ui/StrokeText/StrokeText';
 import { TokenIcon } from '@/shared/ui/TokenIcon/TokenIcon';
 import rectangleImg from '@/shared/assets/win-over-lay/rectangle-1.svg';
 import faceImg from '@/shared/assets/win-over-lay/face.svg';
 
+const CountUp = (CountUpLib as unknown as { default: typeof CountUpLib }).default || CountUpLib;
+
 export const WinPopup = () => {
   const { winAmount } = useGameStore();
 
-  const [whole, decimal] = winAmount.toFixed(2).split('.');
+  const [, decimal] = winAmount.toFixed(2).split('.');
 
   return (
     <motion.div
@@ -37,7 +40,7 @@ export const WinPopup = () => {
                 className="mr-3 border-[2px] border-balance-bg/50 shadow-win-icon"
               />
               <span className="font-poetsen text-black text-[24px] tracking-wide text-stroke-muted">
-                +{whole}
+                +<CountUp start={0} end={winAmount} duration={1.5} decimals={0} />
                 <span className="opacity-50">.{decimal}</span>
               </span>
             </div>
