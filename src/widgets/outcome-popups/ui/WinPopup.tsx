@@ -20,7 +20,7 @@ export const WinPopup = () => {
       exit={{ scale: 0.8, opacity: 0 }}
       className="relative flex flex-col items-center select-none z-50 pointer-events-auto cursor-pointer"
     >
-      <div className="absolute bottom-42 left-4 z-20 rotate-[-10deg] whitespace-nowrap">
+      <div className="absolute bottom-22 left-4 z-20 rotate-[-10deg] whitespace-nowrap">
         <StrokeText className="font-poetsen text-[40px] text-win-title">You win!!!</StrokeText>
       </div>
 

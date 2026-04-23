@@ -19,7 +19,7 @@ export const LosePopup = () => {
       exit={{ scale: 0.8, opacity: 0 }}
       className="relative flex flex-col items-center select-none z-50 pointer-events-auto cursor-pointer"
     >
-      <div className="absolute left-6 bottom-45 z-20 rotate-[10deg] whitespace-nowrap flex gap-3">
+      <div className="absolute left-6 bottom-26 z-20 rotate-[10deg] whitespace-nowrap flex gap-3">
         <StrokeText className="font-poetsen text-[40px] text-text-white">You</StrokeText>
         <StrokeText className="font-poetsen text-[40px] text-lose-title">lose</StrokeText>
       </div>
