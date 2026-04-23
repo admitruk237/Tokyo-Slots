@@ -1,14 +1,21 @@
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import CountUpLib from 'react-countup';
 import { useGameStore } from '@/entities/game/model/store';
 import { StrokeText } from '@/shared/ui/StrokeText/StrokeText';
 import { TokenIcon } from '@/shared/ui/TokenIcon/TokenIcon';
+import { SOUNDS, useAudio } from '@/shared/lib/audio';
 import rectangleImg from '@/shared/assets/lose-over-lay/rectangle-2.svg';
 
 const CountUp = (CountUpLib as unknown as { default: typeof CountUpLib }).default || CountUpLib;
 
 export const LosePopup = () => {
-  const { bet } = useGameStore();
+  const { bet, isMuted } = useGameStore();
+  const { playSound } = useAudio();
+
+  useEffect(() => {
+    if (!isMuted) playSound(SOUNDS.LOSE);
+  }, [isMuted, playSound]);
 
   const [, decimal] = bet.toFixed(2).split('.');
 

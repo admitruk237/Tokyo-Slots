@@ -2,12 +2,20 @@ import { useCallback, useRef } from 'react';
 
 const SOUND_MAP = {
   lever: '/sounds/lever.mp3',
-  spin: '/sounds/spin.mp3',
+  spin: '/sounds/spin.wav',
   win: '/sounds/win.wav',
   lose: '/sounds/lose.wav',
   totalcult: '/sounds/totalcult.wav',
   click: '/sounds/click.wav',
 };
+export const SOUNDS = {
+  LEVER: 'lever',
+  SPIN: 'spin',
+  WIN: 'win',
+  LOSE: 'lose',
+  REEL_STOP: 'totalcult',
+  CLICK: 'click',
+} as const;
 
 export type SoundKey = keyof typeof SOUND_MAP;
 
@@ -25,11 +33,17 @@ export const useAudio = () => {
     if (!audio) return;
 
     audio.currentTime = 0;
-
     audio.volume = volume;
-
     audio.play().catch(() => {});
   }, []);
 
-  return { playSound };
+  const stopSound = useCallback((key: SoundKey) => {
+    const audio = audioCache.current[key];
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  }, []);
+
+  return { playSound, stopSound };
 };

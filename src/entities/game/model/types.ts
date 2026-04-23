@@ -12,6 +12,7 @@ export type GameSymbol = {
   label: string;
   weight: number;
   multiplier: number;
+  src?: string;
 };
 
 export type GameState = {

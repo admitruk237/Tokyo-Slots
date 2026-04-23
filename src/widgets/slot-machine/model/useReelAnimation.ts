@@ -37,6 +37,8 @@ export const useReelAnimation = ({ targetSymbolId, isSpinning, delay, onStop }: 
       wasSpinningRef.current = false;
 
       const stopAnimation = async () => {
+        await new Promise((resolve) => setTimeout(resolve, delay));
+
         const target =
           GAME_CONFIG.SYMBOLS.find((s) => s.id === targetSymbolId) || GAME_CONFIG.SYMBOLS[0];
 

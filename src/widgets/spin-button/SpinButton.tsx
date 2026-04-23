@@ -1,12 +1,14 @@
 import { motion } from 'framer-motion';
 import { useGameStore } from '@/entities/game/model/store';
 import { GAME_STATUS } from '@/entities/game/model/types';
+import { SOUNDS, useAudio } from '@/shared/lib/audio';
 import housingRim from '@/shared/assets/items/Subtract.svg';
 import housingBase from '@/shared/assets/items/Subtract-2.svg';
 import redCap from '@/shared/assets/items/Union.svg';
 
 export const SpinButton = () => {
-  const { startSpin, status, balance, bet } = useGameStore();
+  const { startSpin, status, balance, bet, isMuted } = useGameStore();
+  const { playSound } = useAudio();
 
   const isSpinning = status === GAME_STATUS.SPINNING;
   const isAffordable = balance >= bet;
@@ -15,9 +17,14 @@ export const SpinButton = () => {
   const canAttemptSpin = !isSpinning;
   const isDisabled = !isAffordable || !hasValidBet;
 
+  const handleSpinClick = () => {
+    if (!isMuted) playSound(SOUNDS.CLICK);
+    startSpin();
+  };
+
   return (
     <motion.button
-      onClick={startSpin}
+      onClick={handleSpinClick}
       disabled={!canAttemptSpin}
       className={`relative cursor-pointer select-none outline-none bg-transparent border-none p-0 flex items-center justify-center w-[250px] h-[151px] transition-opacity ${isDisabled && !isSpinning ? 'opacity-70 grayscale-[0.3]' : ''}`}
     >
