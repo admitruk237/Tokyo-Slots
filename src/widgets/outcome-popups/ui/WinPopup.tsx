@@ -47,7 +47,14 @@ export const WinPopup = () => {
                 className="mr-3 border-[2px] border-balance-bg/50 shadow-win-icon"
               />
               <span className="font-poetsen text-black text-[24px] tracking-wide text-stroke-muted">
-                +<CountUp start={0} end={winAmount} duration={1.5} decimals={0} />
+                +
+                <CountUp
+                  start={0}
+                  end={winAmount}
+                  duration={1.5}
+                  decimals={0}
+                  useGrouping={false}
+                />
                 <span className="opacity-50">.{decimal}</span>
               </span>
             </div>

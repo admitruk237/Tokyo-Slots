@@ -22,9 +22,7 @@ export const BetControl = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <StrokeText className="font-poetsen text-2xl lg:text-3xl text-[#54C3EE]">
-        Place a bid
-      </StrokeText>
+      <StrokeText className="font-poetsen text-sm  text-[#54C3EE]">Place a bid</StrokeText>
 
       <div className="mt-[20px] flex items-center">
         <SquareButton onClick={handleDecrement} disabled={isSpinning}>

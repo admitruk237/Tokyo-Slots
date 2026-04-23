@@ -42,7 +42,7 @@ export const LosePopup = () => {
                 className="mr-4 border-[2px] border-balance-bg/50 shadow-win-icon"
               />
               <span className="font-poetsen font-bold text-lose-title text-2xl tracking-[0.15em] text-stroke-muted">
-                -<CountUp start={0} end={bet} duration={1.5} decimals={0} />
+                -<CountUp start={0} end={bet} duration={1.5} decimals={0} useGrouping={false} />
                 <span className="text-white opacity-50 text-2xl pl-1">.{decimal}</span>
               </span>
             </div>

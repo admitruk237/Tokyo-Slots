@@ -9,24 +9,45 @@ export const useSlotMachine = () => {
   const { status, nextReels, finishSpin, isMuted } = useGameStore();
   const { playSound, stopSound } = useAudio();
   const leverControls = useAnimation();
+  const ballControls = useAnimation();
   const [reelsSpinning, setReelsSpinning] = useState(false);
   const stoppedCount = useRef(0);
 
   const triggerLeverAnimation = async () => {
     if (!isMuted) playSound(SOUNDS.LEVER);
 
-    await leverControls.start({
-      rotateX: 90,
-      transition: { duration: 0.3, ease: 'easeIn' },
-    });
-    await leverControls.start({
-      rotateX: 160,
-      transition: { duration: 0.3, ease: 'easeOut' },
-    });
-    await leverControls.start({
-      rotateX: 0,
-      transition: { type: 'spring', stiffness: 120, damping: 20, mass: 1 },
-    });
+    await Promise.all([
+      leverControls.start({
+        rotateX: 60,
+        transition: { duration: 0.25, ease: 'easeIn' },
+      }),
+      ballControls.start({
+        rotateX: -60,
+        transition: { duration: 0.25, ease: 'easeIn' },
+      }),
+    ]);
+
+    await Promise.all([
+      leverControls.start({
+        rotateX: 110,
+        transition: { duration: 0.25, ease: 'easeOut' },
+      }),
+      ballControls.start({
+        rotateX: -110,
+        transition: { duration: 0.25, ease: 'easeOut' },
+      }),
+    ]);
+
+    await Promise.all([
+      leverControls.start({
+        rotateX: 0,
+        transition: { type: 'spring', stiffness: 120, damping: 20, mass: 1 },
+      }),
+      ballControls.start({
+        rotateX: 0,
+        transition: { type: 'spring', stiffness: 120, damping: 20, mass: 1 },
+      }),
+    ]);
   };
 
   useEffect(() => {
@@ -60,6 +81,7 @@ export const useSlotMachine = () => {
 
   return {
     leverControls,
+    ballControls,
     reelsSpinning,
     handleReelStop,
   };

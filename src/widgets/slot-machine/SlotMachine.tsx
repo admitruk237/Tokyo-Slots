@@ -15,48 +15,56 @@ const REEL_CLASSES = [
 
 export const SlotMachine = () => {
   const { nextReels } = useGameStore();
-  const { leverControls, reelsSpinning, handleReelStop } = useSlotMachine();
+  const { leverControls, ballControls, reelsSpinning, handleReelStop } = useSlotMachine();
 
   return (
-    <div className="relative flex items-center justify-center w-[483px] h-[297px]">
-      <img
-        src={machineSvg}
-        alt="Slot Machine Body"
-        className="absolute inset-0 w-full h-full object-contain pointer-events-none z-0"
-      />
+    <div className="relative flex items-center justify-center w-[337px] h-[200px] sm:w-[483px] sm:h-[297px]">
+      <div className="absolute origin-center scale-[0.69] sm:scale-100 flex items-center justify-center w-[483px] h-[297px]">
+        <img
+          src={machineSvg}
+          alt="Slot Machine Body"
+          className="absolute inset-0 w-full h-full object-contain pointer-events-none z-0"
+        />
 
-      <div className="absolute inset-0 z-10 pointer-events-none">
-        {Array(GAME_CONFIG.REELS_COUNT)
-          .fill(null)
-          .map((_, i) => (
-            <SlotReel
-              key={i}
-              className={REEL_CLASSES[i]}
-              isSpinning={reelsSpinning}
-              targetSymbolId={nextReels?.[i]}
-              delay={i * GAME_CONFIG.ANIMATION.REEL_DELAY}
-              onStop={handleReelStop}
-            />
-          ))}
-      </div>
+        <div className="absolute inset-0 z-10 pointer-events-none">
+          {Array(GAME_CONFIG.REELS_COUNT)
+            .fill(null)
+            .map((_, i) => (
+              <SlotReel
+                key={i}
+                className={REEL_CLASSES[i]}
+                isSpinning={reelsSpinning}
+                targetSymbolId={nextReels?.[i]}
+                delay={i * GAME_CONFIG.ANIMATION.REEL_DELAY}
+                onStop={handleReelStop}
+              />
+            ))}
+        </div>
 
-      <div className="absolute left-[450px] top-[147px] -translate-y-1/2 flex items-center z-20 select-none [perspective:1400px] [perspective-origin:center]">
-        <div className="w-[26px] h-[118px] bg-[#0076CC] border-[3px] border-[#341D1A] rounded-r-[10px]" />
+        <div className="absolute left-[450px] top-[147px] -translate-y-1/2 flex items-center z-20 select-none [perspective:1400px] [perspective-origin:center]">
+          <div className="w-[26px] h-[118px] bg-[#0076CC] border-[3px] border-[#341D1A] rounded-r-[10px]" />
 
-        <div className="w-[27px] h-[55px] bg-[#0076CC] border-[3px] border-[#341D1A] rounded-r-[10px] ml-[-3px] relative overflow-visible">
-          <motion.div
-            animate={leverControls}
-            initial={{ rotateX: 0 }}
-            className="absolute bottom-[20px] left-[9px] w-[9px] h-[69px] z-10 overflow-visible origin-bottom [transform-style:preserve-3d] [backface-visibility:hidden]"
-          >
-            <div className="absolute inset-0 bg-[#9CDEFA] border-[3px] border-[#341D1A] rounded-b-full shadow-inner [transform:translateZ(1px)]" />
+          <div className="w-[27px] h-[55px] bg-[#0076CC] border-[3px] border-[#341D1A] rounded-r-[10px] ml-[-3px] relative overflow-visible">
+            <motion.div
+              animate={leverControls}
+              initial={{ rotateX: 0 }}
+              className="absolute bottom-[20px] left-[9px] w-[9px] h-[69px] z-10 overflow-visible origin-bottom [transform-style:preserve-3d] [backface-visibility:hidden]"
+            >
+              <div className="absolute inset-0 bg-[#9CDEFA] border-[3px] border-[#341D1A] rounded-b-full shadow-inner [transform:translateZ(1px)]" />
 
-            <img
-              src={ballIcon}
-              alt="Lever ball"
-              className="absolute -top-[26px] left-1/2 -translate-x-1/2 w-[33px] min-w-[33px] h-[33px] min-h-[33px] max-w-none drop-shadow-xl z-20 [transform:translateZ(2px)]"
-            />
-          </motion.div>
+              <motion.div
+                animate={ballControls}
+                initial={{ rotateX: 0 }}
+                className="absolute -top-[26px] left-1/2 -translate-x-1/2 w-[33px] h-[33px]"
+              >
+                <img
+                  src={ballIcon}
+                  alt="Lever ball"
+                  className="w-full h-full object-contain drop-shadow-xl z-20 [transform:translateZ(2px)]"
+                />
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </div>
