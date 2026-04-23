@@ -10,9 +10,14 @@ import { BetControl } from '@/features/bet-control';
 
 import { BackgroundDecorations } from '@/widgets/background-decorations/BackgroundDecorations';
 
+import { WinOverlay } from '@/widgets/outcome-popups/ui/WinOverlay';
+import { LoseOverlay } from '@/widgets/outcome-popups/ui/LoseOverlay';
+
 const App = () => {
   return (
     <div className="relative min-h-screen bg-linear-to-b from-bg-idle-from to-bg-idle-to flex flex-col items-center">
+      <WinOverlay />
+      <LoseOverlay />
       <BackgroundDecorations />
       <HeaderBlock />
       <GameLogo />

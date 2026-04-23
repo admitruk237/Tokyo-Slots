@@ -1,5 +1,12 @@
 export type GameStatus = 'idle' | 'spinning' | 'win' | 'lose';
 
+export const GAME_STATUS = {
+  IDLE: 'idle',
+  SPINNING: 'spinning',
+  WIN: 'win',
+  LOSE: 'lose',
+} as const;
+
 export type GameSymbol = {
   id: string;
   label: string;
