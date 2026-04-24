@@ -1,9 +1,8 @@
-export interface GameSymbol {
-  id: string;
+export interface GameSymbol<T extends string = string> {
+  id: T;
   label: string;
   weight: number;
   multiplier: number;
-  src?: string;
 }
 
 export type GameStatus = 'idle' | 'spinning' | 'win' | 'lose';

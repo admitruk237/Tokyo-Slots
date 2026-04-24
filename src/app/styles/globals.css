@@ -8,7 +8,7 @@
   --color-bg-win-to: #a8e6f0;
   --color-bg-lose-from: #f5d0a9;
   --color-bg-lose-to: #e8b88a;
-  --color-bg-slot-machine: #f6f6f6;
+  --color-slot-machine-bg: #f6f6f6;
 
   /* ── Accent ── */
   --color-accent-orange: #f7931e;
@@ -23,6 +23,7 @@
   --color-spin-to: #f7931e;
   --color-spin-shadow: #b91c1c;
   --color-spin-border-bg: #ab1c34;
+  --color-spin-text-stroke: rgba(120, 0, 15, 0.7);
 
   /* ── Bet field ── */
   --color-bet-bg: #f7931e;
@@ -62,6 +63,7 @@
   --color-btn-nav-bg: #f7931e;
   --color-btn-nav-border: #d4761a;
   --color-btn-nav-shadow: #a05510;
+  --color-btn-square-shadow: #515895;
   --color-btn-disabled: #969595;
 
   /* ── Balance ── */
@@ -141,4 +143,8 @@
 @utility text-stroke-muted {
   -webkit-text-stroke: 5px rgba(0, 0, 0, 0.45);
   paint-order: stroke fill;
+}
+
+@utility text-stroke-shadow {
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.6));
 }

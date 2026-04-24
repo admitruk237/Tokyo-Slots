@@ -8,7 +8,7 @@ interface Props {
   targetSymbolId?: SymbolId;
   isSpinning: boolean;
   delay: number;
-  onStop?: (symbolId: SymbolId) => void;
+  onStop?: () => void;
   className?: string;
 }
 
@@ -18,7 +18,7 @@ export const SlotReel = (props: Props) => {
   return (
     <div
       className={cn(
-        'w-[75px] h-[85px] bg-bg-slot-machine overflow-hidden flex items-center justify-center absolute',
+        'w-[75px] h-[85px] bg-slot-machine-bg overflow-hidden flex items-center justify-center absolute',
         props.className
       )}
     >

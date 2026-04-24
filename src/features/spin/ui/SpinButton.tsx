@@ -7,9 +7,10 @@ import {
 } from '@/entities/game/model/selectors';
 import { useGameAudio } from '@/entities/game/lib/useGameAudio';
 import { SOUNDS } from '@/shared/lib/audio';
-import housingRim from '../assets/Subtract.svg';
-import housingBase from '../assets/Subtract-2.svg';
-import redCap from '../assets/Union.svg';
+import housingRim from '@/features/spin/assets/Subtract.svg';
+import housingBase from '@/features/spin/assets/Subtract-2.svg';
+import redCap from '@/features/spin/assets/Union.svg';
+import { cn } from '@/shared/lib/utils';
 
 export const SpinButton = () => {
   const { startSpin } = useGameActions();
@@ -21,18 +22,23 @@ export const SpinButton = () => {
   const { playSound } = useGameAudio();
 
   const isDisabled = !isAffordable || !hasValidBet;
+  const isActuallyDisabled = !canAttemptSpin || isDisabled;
 
   const handleSpinClick = () => {
     playSound(SOUNDS.CLICK);
-    startSpin();
+    if (!isActuallyDisabled) {
+      startSpin();
+    }
   };
 
   return (
     <div className="relative flex items-center justify-center w-[175px] h-[105px] sm:w-[250px] sm:h-[151px]">
       <motion.button
         onClick={handleSpinClick}
-        disabled={!canAttemptSpin || isDisabled}
-        className={`absolute origin-center scale-[0.8] sm:scale-100 cursor-pointer select-none outline-none bg-transparent border-none p-0 flex items-center justify-center w-[250px] h-[151px] transition-opacity ${isDisabled && !isSpinning ? 'opacity-70 grayscale-[0.3]' : ''}`}
+        className={cn(
+          'absolute origin-center scale-[0.8] sm:scale-100 select-none outline-none bg-transparent border-none p-0 flex items-center justify-center w-[250px] h-[151px] transition-opacity',
+          isActuallyDisabled ? 'cursor-not-allowed opacity-70 grayscale-[0.3]' : 'cursor-pointer'
+        )}
       >
         <img
           src={housingBase}
@@ -59,7 +65,7 @@ export const SpinButton = () => {
                 className="absolute w-full h-full pointer-events-none bottom-[25px] right-[1px]"
               />
 
-              <span className="relative text-white font-poetsen italic select-none z-10 text-[48px] font-black tracking-[2px] [-webkit-text-stroke:4px_rgba(120,0,15,0.7)] [paint-order:stroke_fill] -skew-x-[6deg] block top-[-38px]">
+              <span className="relative text-white font-poetsen italic select-none z-10 text-[48px] font-black tracking-[2px] [-webkit-text-stroke:4px_var(--color-spin-text-stroke)] [paint-order:stroke_fill] -skew-x-[6deg] block top-[-38px]">
                 {isSpinning ? '...' : 'SPIN'}
               </span>
             </motion.div>

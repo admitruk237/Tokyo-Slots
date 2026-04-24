@@ -14,7 +14,8 @@ export const LosePopup = () => {
 
   useEffect(() => {
     playSound(SOUNDS.LOSE);
-  }, [playSound]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const [, decimal] = bet.toFixed(2).split('.');
 

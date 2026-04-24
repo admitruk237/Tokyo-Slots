@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useGameStore } from '@/entities/game/model/store';
+import { useNextReels } from '@/entities/game/model/selectors';
 import { GAME_CONFIG } from '@/shared/config/gameConfig';
 import ballIcon from '@/shared/assets/slot-machine/ball.svg';
 import machineSvg from '@/shared/assets/slot-machine/slot-machine.svg';
@@ -14,7 +14,7 @@ const REEL_CLASSES = [
 ];
 
 export const SlotMachine = () => {
-  const { nextReels } = useGameStore();
+  const nextReels = useNextReels();
   const { leverControls, ballControls, reelsSpinning, handleReelStop } = useSlotMachine();
 
   return (

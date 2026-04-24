@@ -1,28 +1,37 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useBalance, useBet, useGameActions, useGameStatus } from '@/entities/game/model/selectors';
 import { useGameStore } from '@/entities/game/model/store';
 import { GAME_STATUS } from '@/shared/types/game';
 import { GAME_CONFIG } from '@/shared/config/gameConfig';
 
 export const useBetInput = () => {
-  const { bet, setBet, balance, status } = useGameStore();
+  const bet = useBet();
+  const balance = useBalance();
+  const status = useGameStatus();
+  const { setBet } = useGameActions();
 
   const [inputValue, setInputValue] = useState<string>(bet.toString());
   const [error, setError] = useState<string | null>(null);
 
+  const inputRef = useRef(inputValue);
+
+  useEffect(() => {
+    inputRef.current = inputValue;
+  }, [inputValue]);
+
   const isSpinning = status === GAME_STATUS.SPINNING;
 
   useEffect(() => {
-    const unsubscribe = useGameStore.subscribe(
+    return useGameStore.subscribe(
       (state) => state.bet,
       (newBet) => {
-        if (newBet !== parseFloat(inputValue)) {
+        if (newBet !== parseFloat(inputRef.current)) {
           setInputValue(newBet.toString());
           setError(null);
         }
       }
     );
-    return unsubscribe;
-  }, [inputValue]);
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const rawVal = e.target.value;
@@ -44,7 +53,6 @@ export const useBetInput = () => {
 
     if (parsed > balance) {
       setError('Insufficient funds');
-      setBet(parsed);
       return;
     }
 

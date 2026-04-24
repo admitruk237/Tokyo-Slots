@@ -2,7 +2,8 @@ import { GameBackground } from '@/shared/ui/game-background';
 import { GameForeground } from '@/shared/ui/game-foreground';
 import { Header } from '@/shared/ui/header';
 
-import { BetControl, SpinButton } from '@/features/bet-control';
+import { BetControl } from '@/features/bet-control';
+import { SpinButton } from '@/features/spin';
 import { BalanceDisplay } from '@/entities/game';
 
 import { BackgroundDecorations } from '@/shared/ui/background-decorations';

@@ -1,14 +1,15 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useGameStore } from '@/entities/game/model/store';
+import { useGameActions, useGameStatus } from '@/entities/game/model/selectors';
 import { GAME_STATUS } from '@/shared/types/game';
 import { useAutoDismiss } from '../model/useAutoDismiss';
 import { LosePopup } from './LosePopup';
 
 export const LoseOverlay = () => {
-  const { status, resetStatus } = useGameStore();
+  const status = useGameStatus();
+  const { resetStatus } = useGameActions();
   const isLose = status === GAME_STATUS.LOSE;
 
-  useAutoDismiss(GAME_STATUS.LOSE, 2000);
+  useAutoDismiss(GAME_STATUS.LOSE);
 
   return (
     <AnimatePresence>

@@ -8,14 +8,14 @@ interface Props {
   className?: string;
 }
 
-export const SquareButton = ({ children, onClick, disabled = false, className = '' }: Props) => {
+export const SquareButton = ({ children, onClick, disabled = false, className }: Props) => {
   return (
     <button
       onClick={onClick}
       disabled={disabled}
       className={cn(
         'relative w-[63px] h-[59px] rounded-[16px] border-[2px] border-border-dark',
-        'bg-white shadow-[0_4px_0_rgba(81,88,149,1)]',
+        'bg-white shadow-[0_4px_0_var(--color-btn-square-shadow)]',
         'flex items-center justify-center cursor-pointer z-5',
         'transition-all duration-[120ms] ease-in-out',
         '[backface-visibility:hidden] [-webkit-tap-highlight-color:transparent]',

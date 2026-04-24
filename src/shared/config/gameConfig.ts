@@ -12,6 +12,7 @@ export const GAME_CONFIG = {
   },
 
   REELS_COUNT: 4,
+  DEFAULT_REEL_SYMBOL: 'seven',
 
   SYMBOLS: [
     { id: 'seven', label: '7️⃣', weight: 1, multiplier: 500 },
@@ -19,11 +20,12 @@ export const GAME_CONFIG = {
     { id: 'maneki', label: '🐱', weight: 3, multiplier: 50 },
     { id: 'bell', label: '🔔', weight: 4, multiplier: 20 },
     { id: 'cherry', label: '🍒', weight: 5, multiplier: 10 },
-  ] as const satisfies readonly GameSymbol[],
+  ] as const satisfies readonly GameSymbol<string>[],
 
   ANIMATION: {
     SPIN_DURATION: 2000,
     REEL_DELAY: 300,
+    OVERLAY_DURATION: 2000,
   },
   STORAGE_KEY: 'tokyo-slots-storage',
 } as const;

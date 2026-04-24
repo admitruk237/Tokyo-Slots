@@ -16,7 +16,7 @@ export interface GameActions {
   incrementBet: () => void;
   decrementBet: () => void;
   startSpin: () => void;
-  finishSpin: (results: SymbolId[]) => void;
+  completeSpin: () => void;
   toggleMute: () => void;
   resetStatus: () => void;
 }

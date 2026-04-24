@@ -63,4 +63,17 @@ describe('calculateWin', () => {
 
     expect(result.winAmount).toBe(1234.5);
   });
+
+  it('should return 0 win for two pairs (2+2)', () => {
+    const reels = ['seven', 'seven', 'cherry', 'cherry'] as const;
+    const result = calculateWin(reels, 100, symbols);
+    expect(result.winAmount).toBe(0);
+    expect(result.multiplier).toBe(0);
+  });
+
+  it('should not treat 4-of-a-kind as 3-of-a-kind', () => {
+    const reels = ['seven', 'seven', 'seven', 'seven'] as const;
+    const result = calculateWin(reels, 100, symbols);
+    expect(result.multiplier).toBe(500);
+  });
 });

@@ -11,7 +11,7 @@ interface Props {
   size?: 'sm' | 'md' | 'lg';
 }
 
-export const TokenIcon = ({ className = '', size = 'md' }: Props) => {
+export const TokenIcon = ({ className, size = 'md' }: Props) => {
   return (
     <div
       className={cn(

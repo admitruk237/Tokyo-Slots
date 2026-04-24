@@ -1,14 +1,15 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useGameStore } from '@/entities/game/model/store';
+import { useGameActions, useGameStatus } from '@/entities/game/model/selectors';
 import { GAME_STATUS } from '@/shared/types/game';
 import { useAutoDismiss } from '../model/useAutoDismiss';
 import { WinPopup } from './WinPopup';
 
 export const WinOverlay = () => {
-  const { status, resetStatus } = useGameStore();
+  const status = useGameStatus();
+  const { resetStatus } = useGameActions();
   const isWin = status === GAME_STATUS.WIN;
 
-  useAutoDismiss(GAME_STATUS.WIN, 2000);
+  useAutoDismiss(GAME_STATUS.WIN);
 
   return (
     <AnimatePresence>

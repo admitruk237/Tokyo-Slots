@@ -7,7 +7,7 @@ interface Props {
   targetSymbolId?: SymbolId;
   isSpinning: boolean;
   delay: number;
-  onStop?: (symbolId: SymbolId) => void;
+  onStop?: () => void;
 }
 
 export const useReelAnimation = ({ targetSymbolId, isSpinning, delay, onStop }: Props) => {
@@ -51,7 +51,7 @@ export const useReelAnimation = ({ targetSymbolId, isSpinning, delay, onStop }: 
         });
 
         setCurrentSymbol(target);
-        if (onStop) onStop(targetSymbolId);
+        if (onStop) onStop();
       };
       stopAnimation();
     }

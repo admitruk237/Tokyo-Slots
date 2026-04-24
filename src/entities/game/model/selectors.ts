@@ -28,7 +28,7 @@ export const useGameActions = () => {
   const incrementBet = useGameStore((s) => s.incrementBet);
   const decrementBet = useGameStore((s) => s.decrementBet);
   const startSpin = useGameStore((s) => s.startSpin);
-  const finishSpin = useGameStore((s) => s.finishSpin);
+  const completeSpin = useGameStore((s) => s.completeSpin);
   const toggleMute = useGameStore((s) => s.toggleMute);
   const resetStatus = useGameStore((s) => s.resetStatus);
 
@@ -37,7 +37,7 @@ export const useGameActions = () => {
     incrementBet,
     decrementBet,
     startSpin,
-    finishSpin,
+    completeSpin,
     toggleMute,
     resetStatus,
   };

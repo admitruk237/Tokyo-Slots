@@ -1,9 +1,14 @@
 import { useEffect } from 'react';
-import { useGameStore } from '@/entities/game/model/store';
+import { GAME_CONFIG } from '@/shared/config/gameConfig';
 import type { GameStatus } from '@/shared/types/game';
+import { useGameActions, useGameStatus } from '@/entities/game/model/selectors';
 
-export const useAutoDismiss = (targetStatus: GameStatus, delayMs: number = 2000) => {
-  const { status, resetStatus } = useGameStore();
+export const useAutoDismiss = (
+  targetStatus: GameStatus,
+  delayMs: number = GAME_CONFIG.ANIMATION.OVERLAY_DURATION
+) => {
+  const status = useGameStatus();
+  const { resetStatus } = useGameActions();
 
   useEffect(() => {
     if (status !== targetStatus) return;

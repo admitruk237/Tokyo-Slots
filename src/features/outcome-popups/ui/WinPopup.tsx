@@ -15,7 +15,8 @@ export const WinPopup = () => {
 
   useEffect(() => {
     playSound(SOUNDS.WIN);
-  }, [playSound]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const [, decimal] = winAmount.toFixed(2).split('.');
 

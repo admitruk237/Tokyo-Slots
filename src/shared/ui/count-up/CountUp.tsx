@@ -1,8 +1,29 @@
-import CountUpLib, { type CountUpProps } from 'react-countup';
-
-const CountUpComponent =
-  (CountUpLib as unknown as { default: typeof CountUpLib }).default || CountUpLib;
+import { useEffect, useRef } from 'react';
+import { type CountUpProps, useCountUp } from 'react-countup';
 
 export const CountUp = (props: CountUpProps) => {
-  return <CountUpComponent {...props} />;
+  const countUpRef = useRef<HTMLSpanElement>(null);
+
+  const { update } = useCountUp({
+    ref: countUpRef,
+    start: props.start,
+    end: props.end,
+    duration: props.duration,
+    decimals: props.decimals,
+    separator: props.separator ?? '',
+    useGrouping: false,
+    decimal: props.decimal,
+    prefix: props.prefix,
+    suffix: props.suffix,
+    onEnd: props.onEnd,
+    onStart: props.onStart,
+  });
+
+  useEffect(() => {
+    update(props.end ?? 0);
+  }, [props.end, update]);
+
+  return <span ref={countUpRef} className={props.className} style={props.style} />;
 };
+
+export type { CountUpProps };
