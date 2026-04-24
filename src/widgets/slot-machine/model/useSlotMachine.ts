@@ -88,6 +88,7 @@ export const useSlotMachine = () => {
       isMounted = false;
       if (timerId) clearTimeout(timerId);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, triggerLeverAnimation, playSound]);
 
   const handleReelStop = useCallback(() => {

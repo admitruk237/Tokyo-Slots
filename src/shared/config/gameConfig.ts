@@ -20,6 +20,7 @@ export const GAME_CONFIG = {
     { id: 'maneki', label: '🐱', weight: 3, multiplier: 50 },
     { id: 'bell', label: '🔔', weight: 4, multiplier: 20 },
     { id: 'cherry', label: '🍒', weight: 5, multiplier: 10 },
+    { id: 'sakura', label: '🌸', weight: 6, multiplier: 5 },
   ] as const satisfies readonly GameSymbol<string>[],
 
   ANIMATION: {
