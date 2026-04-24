@@ -1,24 +1,29 @@
 import { motion } from 'framer-motion';
-import { useGameStore } from '@/entities/game/model/store';
-import { GAME_STATUS } from '@/entities/game/model/types';
-import { SOUNDS, useAudio } from '@/shared/lib/audio';
-import housingRim from '@/shared/assets/items/Subtract.svg';
-import housingBase from '@/shared/assets/items/Subtract-2.svg';
-import redCap from '@/shared/assets/items/Union.svg';
+import {
+  useBetStatus,
+  useCanSpin,
+  useGameActions,
+  useIsSpinning,
+} from '@/entities/game/model/selectors';
+import { useGameAudio } from '@/entities/game/lib/useGameAudio';
+import { SOUNDS } from '@/shared/lib/audio';
+import housingRim from '../assets/Subtract.svg';
+import housingBase from '../assets/Subtract-2.svg';
+import redCap from '../assets/Union.svg';
 
 export const SpinButton = () => {
-  const { startSpin, status, balance, bet, isMuted } = useGameStore();
-  const { playSound } = useAudio();
+  const { startSpin } = useGameActions();
 
-  const isSpinning = status === GAME_STATUS.SPINNING;
-  const isAffordable = balance >= bet;
-  const hasValidBet = bet > 0;
+  const isSpinning = useIsSpinning();
+  const { isAffordable, hasValidBet } = useBetStatus();
+  const canAttemptSpin = useCanSpin();
 
-  const canAttemptSpin = !isSpinning;
+  const { playSound } = useGameAudio();
+
   const isDisabled = !isAffordable || !hasValidBet;
 
   const handleSpinClick = () => {
-    if (!isMuted) playSound(SOUNDS.CLICK);
+    playSound(SOUNDS.CLICK);
     startSpin();
   };
 
@@ -26,7 +31,7 @@ export const SpinButton = () => {
     <div className="relative flex items-center justify-center w-[175px] h-[105px] sm:w-[250px] sm:h-[151px]">
       <motion.button
         onClick={handleSpinClick}
-        disabled={!canAttemptSpin}
+        disabled={!canAttemptSpin || isDisabled}
         className={`absolute origin-center scale-[0.8] sm:scale-100 cursor-pointer select-none outline-none bg-transparent border-none p-0 flex items-center justify-center w-[250px] h-[151px] transition-opacity ${isDisabled && !isSpinning ? 'opacity-70 grayscale-[0.3]' : ''}`}
       >
         <img
@@ -37,7 +42,7 @@ export const SpinButton = () => {
 
         <div className="absolute inset-0 flex justify-center items-center top-[-20px] z-[5]">
           <div className="relative flex items-center justify-center w-[240px] h-[114px]">
-            <div className="absolute inset-[15px] rounded-[35px] bg-[#ab1c34] z-[2]" />
+            <div className="absolute inset-[15px] rounded-[35px] bg-spin-border-bg z-[2]" />
 
             <motion.div
               className="absolute flex items-center justify-center w-[196px] h-[83px] top-[10px] z-[20]"

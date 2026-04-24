@@ -1,20 +1,24 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useAnimation } from 'framer-motion';
-import { useGameStore } from '@/entities/game/model/store';
+import { useGameActions, useGameStatus, useNextReels } from '@/entities/game/model/selectors';
 import { GAME_CONFIG } from '@/shared/config/gameConfig';
-import { SOUNDS, useAudio } from '@/shared/lib/audio';
+import { SOUNDS } from '@/shared/lib/audio';
 import { GAME_STATUS } from '@/entities/game/model/types';
+import { useGameAudio } from '@/entities/game/lib/useGameAudio';
 
 export const useSlotMachine = () => {
-  const { status, nextReels, finishSpin, isMuted } = useGameStore();
-  const { playSound, stopSound } = useAudio();
+  const status = useGameStatus();
+  const nextReels = useNextReels();
+  const { finishSpin } = useGameActions();
+
+  const { playSound, stopSound } = useGameAudio();
   const leverControls = useAnimation();
   const ballControls = useAnimation();
   const [reelsSpinning, setReelsSpinning] = useState(false);
   const stoppedCount = useRef(0);
 
-  const triggerLeverAnimation = async () => {
-    if (!isMuted) playSound(SOUNDS.LEVER);
+  const triggerLeverAnimation = useCallback(async () => {
+    playSound(SOUNDS.LEVER);
 
     await Promise.all([
       leverControls.start({
@@ -48,36 +52,51 @@ export const useSlotMachine = () => {
         transition: { type: 'spring', stiffness: 120, damping: 20, mass: 1 },
       }),
     ]);
-  };
+  }, [playSound, leverControls, ballControls]);
 
   useEffect(() => {
+    let isMounted = true;
+    let timerId: ReturnType<typeof setTimeout> | null = null;
+
     if (status === GAME_STATUS.SPINNING && !reelsSpinning) {
       const handleSpinProcess = async () => {
         await triggerLeverAnimation();
 
-        if (!isMuted) playSound(SOUNDS.SPIN, 0.2);
+        if (!isMounted) return;
+
+        playSound(SOUNDS.SPIN, 0.2);
         setReelsSpinning(true);
         stoppedCount.current = 0;
 
-        setTimeout(() => {
-          setReelsSpinning(false);
+        timerId = setTimeout(() => {
+          if (isMounted) {
+            setReelsSpinning(false);
+          }
         }, GAME_CONFIG.ANIMATION.SPIN_DURATION);
       };
 
       handleSpinProcess();
     }
-  }, [status]);
 
-  const handleReelStop = (_symbolId: string) => {
-    if (!isMuted) playSound(SOUNDS.REEL_STOP, 0.4);
-    stoppedCount.current += 1;
-    if (stoppedCount.current === GAME_CONFIG.REELS_COUNT) {
-      if (!isMuted) stopSound(SOUNDS.SPIN);
-      if (nextReels) {
-        finishSpin(nextReels);
+    return () => {
+      isMounted = false;
+      if (timerId) clearTimeout(timerId);
+    };
+  }, [status, triggerLeverAnimation, playSound]);
+
+  const handleReelStop = useCallback(
+    (_symbolId: string) => {
+      playSound(SOUNDS.REEL_STOP, 0.4);
+      stoppedCount.current += 1;
+      if (stoppedCount.current === GAME_CONFIG.REELS_COUNT) {
+        stopSound(SOUNDS.SPIN);
+        if (nextReels) {
+          finishSpin(nextReels);
+        }
       }
-    }
-  };
+    },
+    [playSound, stopSound, nextReels, finishSpin]
+  );
 
   return {
     leverControls,

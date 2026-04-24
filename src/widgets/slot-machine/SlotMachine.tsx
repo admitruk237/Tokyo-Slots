@@ -42,15 +42,15 @@ export const SlotMachine = () => {
         </div>
 
         <div className="absolute left-[450px] top-[147px] -translate-y-1/2 flex items-center z-20 select-none [perspective:1400px] [perspective-origin:center]">
-          <div className="w-[26px] h-[118px] bg-[#0076CC] border-[3px] border-[#341D1A] rounded-r-[10px]" />
+          <div className="w-[26px] h-[118px] bg-machine-accent border-[3px] border-border-dark rounded-r-[10px]" />
 
-          <div className="w-[27px] h-[55px] bg-[#0076CC] border-[3px] border-[#341D1A] rounded-r-[10px] ml-[-3px] relative overflow-visible">
+          <div className="w-[27px] h-[55px] bg-machine-accent border-[3px] border-border-dark rounded-r-[10px] ml-[-3px] relative overflow-visible">
             <motion.div
               animate={leverControls}
               initial={{ rotateX: 0 }}
               className="absolute bottom-[20px] left-[9px] w-[9px] h-[69px] z-10 overflow-visible origin-bottom [transform-style:preserve-3d] [backface-visibility:hidden]"
             >
-              <div className="absolute inset-0 bg-[#9CDEFA] border-[3px] border-[#341D1A] rounded-b-full shadow-inner [transform:translateZ(1px)]" />
+              <div className="absolute inset-0 bg-lever-shaft border-[3px] border-border-dark rounded-b-full shadow-inner [transform:translateZ(1px)]" />
 
               <motion.div
                 animate={ballControls}

@@ -15,7 +15,7 @@ export const TokenIcon = ({ className = '', size = 'md' }: Props) => {
   return (
     <div
       className={cn(
-        'rounded-full bg-balance-circle flex items-center justify-center border-3 border-balance-bg shadow-[0_5px_0_#271613] select-none shrink-0',
+        'rounded-full bg-balance-circle flex items-center justify-center border-3 border-balance-bg shadow-[0_5px_0_var(--color-border-dark-shadow)] select-none shrink-0',
         sizeClasses[size],
         className
       )}

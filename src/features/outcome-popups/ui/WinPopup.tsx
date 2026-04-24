@@ -1,22 +1,21 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import CountUpLib from 'react-countup';
-import { useGameStore } from '@/entities/game/model/store';
-import { StrokeText } from '@/shared/ui/StrokeText/StrokeText';
-import { TokenIcon } from '@/shared/ui/TokenIcon/TokenIcon';
-import { SOUNDS, useAudio } from '@/shared/lib/audio';
+import { CountUp } from '@/shared/ui/count-up';
+import { useWinAmount } from '@/entities/game/model/selectors';
+import { useGameAudio } from '@/entities/game/lib/useGameAudio';
+import { StrokeText } from '@/shared/ui/stroke-text';
+import { TokenIcon } from '@/shared/ui/token-icon';
+import { SOUNDS } from '@/shared/lib/audio';
 import rectangleImg from '@/shared/assets/win-over-lay/rectangle-1.svg';
 import faceImg from '@/shared/assets/win-over-lay/face.svg';
 
-const CountUp = (CountUpLib as unknown as { default: typeof CountUpLib }).default || CountUpLib;
-
 export const WinPopup = () => {
-  const { winAmount, isMuted } = useGameStore();
-  const { playSound } = useAudio();
+  const winAmount = useWinAmount();
+  const { playSound } = useGameAudio();
 
   useEffect(() => {
-    if (!isMuted) playSound(SOUNDS.WIN);
-  }, [isMuted, playSound]);
+    playSound(SOUNDS.WIN);
+  }, [playSound]);
 
   const [, decimal] = winAmount.toFixed(2).split('.');
 

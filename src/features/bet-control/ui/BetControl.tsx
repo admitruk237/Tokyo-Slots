@@ -1,28 +1,28 @@
-import { useGameStore } from '@/entities/game/model/store';
-import { SquareButton } from '@/shared/ui/SquareButton/SquareButton';
-import { StrokeText } from '@/shared/ui/StrokeText/StrokeText';
-import { SOUNDS, useAudio } from '@/shared/lib/audio';
+import { useGameActions, useIsSpinning } from '@/entities/game/model/selectors';
+import { SquareButton } from '@/shared/ui/square-button';
+import { StrokeText } from '@/shared/ui/stroke-text';
+import { SOUNDS } from '@/shared/lib/audio';
 import { BetDisplay } from './BetDisplay';
-import { GAME_STATUS } from '@/entities/game/model/types';
+import { useGameAudio } from '@/entities/game/lib/useGameAudio';
 
 export const BetControl = () => {
-  const { incrementBet, decrementBet, status, isMuted } = useGameStore();
-  const { playSound } = useAudio();
-  const isSpinning = status === GAME_STATUS.SPINNING;
+  const { incrementBet, decrementBet } = useGameActions();
+  const isSpinning = useIsSpinning();
+  const { playSound } = useGameAudio();
 
   const handleIncrement = () => {
-    if (!isMuted) playSound(SOUNDS.CLICK);
+    playSound(SOUNDS.CLICK);
     incrementBet();
   };
 
   const handleDecrement = () => {
-    if (!isMuted) playSound(SOUNDS.CLICK);
+    playSound(SOUNDS.CLICK);
     decrementBet();
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <StrokeText className="font-poetsen text-sm  text-[#54C3EE]">Place a bid</StrokeText>
+    <form onSubmit={(e) => e.preventDefault()} className="flex flex-col items-center">
+      <StrokeText className="font-poetsen text-sm text-win-title">Place a bid</StrokeText>
 
       <div className="mt-[20px] flex items-center">
         <SquareButton onClick={handleDecrement} disabled={isSpinning}>
@@ -35,6 +35,6 @@ export const BetControl = () => {
           <span className="text-black font-poetsen text-4xl leading-none select-none">+</span>
         </SquareButton>
       </div>
-    </div>
+    </form>
   );
 };

@@ -1,13 +1,11 @@
-import CountUpLib from 'react-countup';
-import { useGameStore } from '@/entities/game/model/store';
+import { CountUp } from '@/shared/ui/count-up';
+import { useBalance } from '@/entities/game/model/selectors';
 import { cn } from '@/shared/lib/utils';
 import balanceIcon from '@/shared/assets/items/Balance.svg';
-import { TokenIcon } from '@/shared/ui/TokenIcon/TokenIcon';
-
-const CountUp = (CountUpLib as unknown as { default: typeof CountUpLib }).default || CountUpLib;
+import { TokenIcon } from '@/shared/ui/token-icon';
 
 export const BalanceDisplay = () => {
-  const { balance } = useGameStore();
+  const balance = useBalance();
 
   const whole = Math.floor(balance);
   const [, decimal] = balance.toFixed(2).split('.');

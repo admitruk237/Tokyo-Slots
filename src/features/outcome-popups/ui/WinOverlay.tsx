@@ -31,10 +31,9 @@ export const WinOverlay = () => {
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-              className="w-[200vmax] h-[200vmax] bg-win-sunburst"
+              className="w-[300vmax] h-[300vmax] bg-win-sunburst flex-shrink-0"
             />
           </motion.div>
-
           <WinPopup />
         </motion.div>
       )}

@@ -14,13 +14,19 @@
   --color-accent-orange: #f7931e;
   --color-accent-red: #ef4444;
 
+  /* ── Borders & Shadows ── */
+  --color-border-dark: #341d1a;
+  --color-border-dark-shadow: #271613;
+
   /* ── Spin button ── */
   --color-spin-from: #ef4444;
   --color-spin-to: #f7931e;
   --color-spin-shadow: #b91c1c;
+  --color-spin-border-bg: #ab1c34;
 
   /* ── Bet field ── */
   --color-bet-bg: #f7931e;
+  --color-bet-input-bg: #887c7b;
 
   /* ── Jackpot bar ── */
   --color-jackpot-bg: #3d2010;
@@ -36,6 +42,8 @@
   --color-reel-bg: #f0faff;
   --color-machine-body: #8fd3f4;
   --color-machine-border: #5bb8d4;
+  --color-machine-accent: #0076cc;
+  --color-lever-shaft: #9cdefa;
 
   /* ── Popup ── */
   --color-win-amount: #22c55e;
@@ -54,6 +62,7 @@
   --color-btn-nav-bg: #f7931e;
   --color-btn-nav-border: #d4761a;
   --color-btn-nav-shadow: #a05510;
+  --color-btn-disabled: #969595;
 
   /* ── Balance ── */
   --color-balance-bg: #341d1a;
@@ -68,6 +77,9 @@
   /* ── Lose Visuals ── */
   --color-lose-overlay-bg: #ba562b;
   --color-lose-title: #ff0000;
+
+  /* ── Header ── */
+  --color-header-bg: #fff6de;
 }
 
 @utility text-title-outline {

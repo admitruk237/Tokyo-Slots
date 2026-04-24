@@ -1,17 +1,14 @@
-import { GameBackground } from '@/widgets/game-background/GameBackground';
-import { GameForeground } from '@/widgets/game-foreground/GameForeground';
-import { GameLogo } from '@/widgets/game-logo/GameLogo';
-import { HeaderBlock } from '@/widgets/header-block/HeaderBlock';
-import { BalanceDisplay } from '@/widgets/balance-display/BalanceDisplay';
-import { SpinButton } from '@/widgets/spin-button/SpinButton';
-
+import { GameBackground } from '@/shared/ui/game-background';
+import { GameForeground } from '@/shared/ui/game-foreground';
+import { Header } from '@/shared/ui/header';
 import { SlotMachine } from '@/widgets/slot-machine/SlotMachine';
-import { BetControl } from '@/features/bet-control';
+import { BetControl, SpinButton } from '@/features/bet-control';
+import { BalanceDisplay } from '@/entities/game';
 
-import { BackgroundDecorations } from '@/widgets/background-decorations/BackgroundDecorations';
+import { BackgroundDecorations } from '@/shared/ui/background-decorations';
 
-import { WinOverlay } from '@/widgets/outcome-popups/ui/WinOverlay';
-import { LoseOverlay } from '@/widgets/outcome-popups/ui/LoseOverlay';
+import { LoseOverlay, WinOverlay } from '@/features/outcome-popups';
+import { Logo } from '@/shared/ui/logo';
 
 const App = () => {
   return (
@@ -19,8 +16,8 @@ const App = () => {
       <WinOverlay />
       <LoseOverlay />
       <BackgroundDecorations />
-      <HeaderBlock />
-      <GameLogo />
+      <Header />
+      <Logo />
 
       <div className="mt-12 md:mt-7 w-full flex justify-center px-4 relative z-10">
         <SlotMachine />
