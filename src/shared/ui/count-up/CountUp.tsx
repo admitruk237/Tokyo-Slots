@@ -1,13 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { type RefObject, useEffect, useRef } from 'react';
 import { type CountUpProps, useCountUp } from 'react-countup';
 
 export const CountUp = (props: CountUpProps) => {
   const countUpRef = useRef<HTMLElement>(null);
 
   const { update } = useCountUp({
-    // Cast to any due to RefObject<T | null> mismatch in react-countup types with React 19.
-    // Tried multiple options (like unknown casting), but only 'any' prevents build failure here.
-    ref: countUpRef as any,
+    ref: countUpRef as unknown as RefObject<HTMLElement>,
     start: props.start,
     end: props.end,
     duration: props.duration,
