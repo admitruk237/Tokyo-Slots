@@ -1,7 +1,7 @@
 import { GameBackground } from '@/shared/ui/game-background';
 import { GameForeground } from '@/shared/ui/game-foreground';
 import { Header } from '@/shared/ui/header';
-import { SlotMachine } from '@/widgets/slot-machine/SlotMachine';
+
 import { BetControl, SpinButton } from '@/features/bet-control';
 import { BalanceDisplay } from '@/entities/game';
 
@@ -9,6 +9,7 @@ import { BackgroundDecorations } from '@/shared/ui/background-decorations';
 
 import { LoseOverlay, WinOverlay } from '@/features/outcome-popups';
 import { Logo } from '@/shared/ui/logo';
+import { SlotMachine } from '@/widgets/slot-machine/ui/slot-machine';
 
 const App = () => {
   return (

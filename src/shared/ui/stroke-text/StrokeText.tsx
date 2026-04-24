@@ -1,10 +1,10 @@
 import { cn } from '@/shared/lib/utils';
 import type { ReactNode } from 'react';
 
-type Props = {
+interface Props {
   children: ReactNode;
   className?: string;
-};
+}
 
 export const StrokeText = ({ children, className = '' }: Props) => {
   return (

@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { useAnimation } from 'framer-motion';
-import { GAME_CONFIG } from '@/shared/config/gameConfig';
-import type { GameSymbol } from '@/entities/game/model/types';
+import { GAME_CONFIG, type SymbolId } from '@/shared/config/gameConfig';
+import type { GameSymbol } from '@/shared/types/game';
 
-type Props = {
-  targetSymbolId?: string;
+interface Props {
+  targetSymbolId?: SymbolId;
   isSpinning: boolean;
   delay: number;
-  onStop?: (symbolId: string) => void;
-};
+  onStop?: (symbolId: SymbolId) => void;
+}
 
 export const useReelAnimation = ({ targetSymbolId, isSpinning, delay, onStop }: Props) => {
   const controls = useAnimation();

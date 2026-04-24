@@ -6,10 +6,10 @@ const sizeClasses = {
   lg: 'w-12 h-12 text-2xl',
 };
 
-type Props = {
+interface Props {
   className?: string;
   size?: 'sm' | 'md' | 'lg';
-};
+}
 
 export const TokenIcon = ({ className = '', size = 'md' }: Props) => {
   return (

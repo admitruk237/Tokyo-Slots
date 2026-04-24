@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useGameStore } from '@/entities/game/model/store';
-import { GAME_STATUS } from '@/entities/game/model/types';
+import { GAME_STATUS } from '@/shared/types/game';
 import { useAutoDismiss } from '../model/useAutoDismiss';
 import { WinPopup } from './WinPopup';
 

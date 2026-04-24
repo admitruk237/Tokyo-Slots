@@ -1,14 +1,16 @@
 import { cn } from '@/shared/lib/utils';
 import { motion } from 'framer-motion';
-import { useReelAnimation } from '../model/useReelAnimation';
+import { useReelAnimation } from '../../model/useReelAnimation';
 
-type Props = {
-  targetSymbolId?: string;
+import type { SymbolId } from '@/shared/config/gameConfig';
+
+interface Props {
+  targetSymbolId?: SymbolId;
   isSpinning: boolean;
   delay: number;
-  onStop?: (symbolId: string) => void;
+  onStop?: (symbolId: SymbolId) => void;
   className?: string;
-};
+}
 
 export const SlotReel = (props: Props) => {
   const { controls, currentSymbol } = useReelAnimation(props);

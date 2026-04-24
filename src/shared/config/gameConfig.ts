@@ -1,3 +1,5 @@
+import type { GameSymbol } from '@/shared/types/game';
+
 export const GAME_CONFIG = {
   INITIAL_BALANCE: 999999.99,
   INITIAL_JACKPOT: 10000.0,
@@ -17,10 +19,13 @@ export const GAME_CONFIG = {
     { id: 'maneki', label: '🐱', weight: 3, multiplier: 50 },
     { id: 'bell', label: '🔔', weight: 4, multiplier: 20 },
     { id: 'cherry', label: '🍒', weight: 5, multiplier: 10 },
-  ],
+  ] as const satisfies readonly GameSymbol[],
 
   ANIMATION: {
     SPIN_DURATION: 2000,
     REEL_DELAY: 300,
   },
+  STORAGE_KEY: 'tokyo-slots-storage',
 } as const;
+
+export type SymbolId = (typeof GAME_CONFIG.SYMBOLS)[number]['id'];

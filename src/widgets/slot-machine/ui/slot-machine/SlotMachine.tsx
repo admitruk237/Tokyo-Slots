@@ -2,9 +2,9 @@ import { motion } from 'framer-motion';
 import { useGameStore } from '@/entities/game/model/store';
 import { GAME_CONFIG } from '@/shared/config/gameConfig';
 import ballIcon from '@/shared/assets/slot-machine/ball.svg';
-import machineSvg from '@/shared/assets/slot-machine/slot-mashine.svg';
-import { SlotReel } from './ui/SlotReel';
-import { useSlotMachine } from './model/useSlotMachine';
+import machineSvg from '@/shared/assets/slot-machine/slot-machine.svg';
+import { useSlotMachine } from '../../model/useSlotMachine';
+import { SlotReel } from './SlotReel';
 
 const REEL_CLASSES = [
   'left-[53px] top-[107px]',

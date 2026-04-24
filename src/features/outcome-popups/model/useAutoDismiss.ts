@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useGameStore } from '@/entities/game/model/store';
-import type { GameStatus } from '@/entities/game/model/types';
+import type { GameStatus } from '@/shared/types/game';
 
 export const useAutoDismiss = (targetStatus: GameStatus, delayMs: number = 2000) => {
   const { status, resetStatus } = useGameStore();

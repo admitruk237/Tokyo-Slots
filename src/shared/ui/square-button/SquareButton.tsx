@@ -1,12 +1,12 @@
 import { cn } from '@/shared/lib/utils';
 import type { ReactNode } from 'react';
 
-type Props = {
+interface Props {
   children: ReactNode;
   onClick?: () => void;
   disabled?: boolean;
   className?: string;
-};
+}
 
 export const SquareButton = ({ children, onClick, disabled = false, className = '' }: Props) => {
   return (

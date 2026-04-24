@@ -1,38 +1,24 @@
-export type GameStatus = 'idle' | 'spinning' | 'win' | 'lose';
+import type { SymbolId } from '@/shared/config/gameConfig';
+import type { GameStatus } from '@/shared/types/game';
 
-export const GAME_STATUS = {
-  IDLE: 'idle',
-  SPINNING: 'spinning',
-  WIN: 'win',
-  LOSE: 'lose',
-} as const;
-
-export type GameSymbol = {
-  id: string;
-  label: string;
-  weight: number;
-  multiplier: number;
-  src?: string;
-};
-
-export type GameState = {
+export interface GameState {
   balance: number;
   bet: number;
-  reels: string[];
-  nextReels?: string[];
+  reels: SymbolId[];
+  nextReels?: SymbolId[];
   status: GameStatus;
   winAmount: number;
   isMuted: boolean;
-};
+}
 
-export type GameActions = {
+export interface GameActions {
   setBet: (amount: number) => void;
   incrementBet: () => void;
   decrementBet: () => void;
   startSpin: () => void;
-  finishSpin: (results: string[]) => void;
+  finishSpin: (results: SymbolId[]) => void;
   toggleMute: () => void;
   resetStatus: () => void;
-};
+}
 
-export type GameStore = GameState & GameActions;
+export interface GameStore extends GameState, GameActions {}

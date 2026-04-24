@@ -1,6 +1,6 @@
 import { useShallow } from 'zustand/react/shallow';
 import { useGameStore } from './store';
-import { GAME_STATUS } from './types';
+import { GAME_STATUS } from '@/shared/types/game';
 
 export const useBalance = () => useGameStore((s) => s.balance);
 export const useBet = () => useGameStore((s) => s.bet);

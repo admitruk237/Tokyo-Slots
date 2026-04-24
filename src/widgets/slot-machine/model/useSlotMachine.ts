@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useAnimation } from 'framer-motion';
 import { useGameActions, useGameStatus, useNextReels } from '@/entities/game/model/selectors';
-import { GAME_CONFIG } from '@/shared/config/gameConfig';
+import { GAME_CONFIG, type SymbolId } from '@/shared/config/gameConfig';
 import { SOUNDS } from '@/shared/lib/audio';
-import { GAME_STATUS } from '@/entities/game/model/types';
 import { useGameAudio } from '@/entities/game/lib/useGameAudio';
+import { GAME_STATUS } from '@/shared/types/game';
 
 export const useSlotMachine = () => {
   const status = useGameStatus();
@@ -85,7 +85,7 @@ export const useSlotMachine = () => {
   }, [status, triggerLeverAnimation, playSound]);
 
   const handleReelStop = useCallback(
-    (_symbolId: string) => {
+    (_symbolId: SymbolId) => {
       playSound(SOUNDS.REEL_STOP, 0.4);
       stoppedCount.current += 1;
       if (stoppedCount.current === GAME_CONFIG.REELS_COUNT) {

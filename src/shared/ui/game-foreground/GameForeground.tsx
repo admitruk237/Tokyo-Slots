@@ -1,5 +1,5 @@
-import cloudSvg from '@shared/assets/bg/cloud.svg';
-import cloudMobileSvg from '@shared/assets/bg/cloud-mobile.svg';
+import cloudSvg from '@/shared/assets/bg/cloud.svg';
+import cloudMobileSvg from '@/shared/assets/bg/cloud-mobile.svg';
 
 export const GameForeground = () => {
   return (
