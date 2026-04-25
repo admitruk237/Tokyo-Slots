@@ -15,7 +15,7 @@ export default defineConfig({
         name: 'Tokyo Slots',
         short_name: 'TokyoSlots',
         description: 'Premium Tokyo-styled slot machine game',
-        theme_color: '#84cc16',
+        theme_color: '#daf3a6',
         background_color: '#000000',
         display: 'standalone',
         orientation: 'portrait',
