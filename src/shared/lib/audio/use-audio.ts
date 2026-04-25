@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 const SOUND_MAP = {
   lever: '/sounds/lever.mp3',
@@ -7,7 +7,8 @@ const SOUND_MAP = {
   lose: '/sounds/lose.wav',
   totalcult: '/sounds/totalcult.wav',
   click: '/sounds/click.wav',
-};
+} as const;
+
 export const SOUNDS = {
   LEVER: 'lever',
   SPIN: 'spin',
@@ -22,14 +23,19 @@ export type SoundKey = keyof typeof SOUND_MAP;
 export const useAudio = () => {
   const audioCache = useRef<Partial<Record<SoundKey, HTMLAudioElement>>>({});
 
-  const playSound = useCallback((key: SoundKey, volume: number = 0.3) => {
-    let audio = audioCache.current[key];
+  useEffect(() => {
+    const entries = Object.entries(SOUND_MAP) as [SoundKey, string][];
 
-    if (!audio) {
-      audio = new Audio(SOUND_MAP[key]);
+    entries.forEach(([key, src]) => {
+      const audio = new Audio();
+      audio.preload = 'auto';
+      audio.src = src;
       audioCache.current[key] = audio;
-    }
+    });
+  }, []);
 
+  const playSound = useCallback((key: SoundKey, volume: number = 0.3) => {
+    const audio = audioCache.current[key];
     if (!audio) return;
 
     audio.currentTime = 0;
