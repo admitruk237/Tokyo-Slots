@@ -14,6 +14,7 @@ dist-ssr
 
 CLAUDE.md
 .antigravityrules
+.claude/
 
 # Editor directories and files
 .vscode/*

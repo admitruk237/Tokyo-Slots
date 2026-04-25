@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef } from 'react';
 
 const SOUND_MAP = {
   lever: '/sounds/lever.mp3',
-  spin: '/sounds/spin.wav',
+  spin: '/sounds/spin.mp3',
   win: '/sounds/win.wav',
   lose: '/sounds/lose.wav',
   totalcult: '/sounds/totalcult.wav',
