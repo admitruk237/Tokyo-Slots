@@ -11,10 +11,12 @@ import { BackgroundDecorations } from '@/shared/ui/background-decorations';
 import { LoseOverlay, WinOverlay } from '@/features/outcome-popups';
 import { Logo } from '@/shared/ui/logo';
 import { SlotMachine } from '@/widgets/slot-machine/ui/slot-machine';
+import { Intro } from '@/widgets/intro';
 
 const App = () => {
   return (
     <div className="relative min-h-screen bg-linear-to-b from-bg-idle-from to-bg-idle-to flex flex-col items-center">
+      <Intro />
       <WinOverlay />
       <LoseOverlay />
       <BackgroundDecorations />
