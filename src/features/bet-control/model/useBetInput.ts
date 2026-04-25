@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useBalance, useBet, useGameActions, useGameStatus } from '@/entities/game/model/selectors';
-import { useGameStore } from '@/entities/game/model/store';
+import { useBalance, useBet, useGameActions, useGameStatus, useGameStore } from '@/entities/game';
 import { GAME_STATUS } from '@/shared/types/game';
 import { GAME_CONFIG } from '@/shared/config/gameConfig';
 
@@ -79,5 +78,5 @@ export const useBetInput = () => {
     isSpinning,
     handleInputChange,
     handleBlur,
-  };
+  } as const;
 };

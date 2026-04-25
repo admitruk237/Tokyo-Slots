@@ -1,13 +1,3 @@
-import citySvg from '@/shared/assets/bg/tokiocity.svg';
+import { City } from '@/shared/ui/city';
 
-export const GameBackground = () => {
-  return (
-    <>
-      <img
-        src={citySvg}
-        alt=""
-        className="absolute bottom-[125px] left-0 w-full z-0 pointer-events-none"
-      />
-    </>
-  );
-};
+export const GameBackground = () => <City />;

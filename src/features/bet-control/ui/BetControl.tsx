@@ -1,9 +1,8 @@
-import { useGameActions, useIsSpinning } from '@/entities/game/model/selectors';
+import { useGameActions, useGameAudio, useIsSpinning } from '@/entities/game';
 import { SquareButton } from '@/shared/ui/square-button';
 import { StrokeText } from '@/shared/ui/stroke-text';
 import { SOUNDS } from '@/shared/lib/audio';
 import { BetDisplay } from './BetDisplay';
-import { useGameAudio } from '@/entities/game/lib/useGameAudio';
 
 export const BetControl = () => {
   const { incrementBet, decrementBet } = useGameActions();

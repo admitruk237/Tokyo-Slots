@@ -1,5 +1,5 @@
 import { CountUp } from '@/shared/ui/count-up';
-import { useBalance } from '@/entities/game/model/selectors';
+import { useBalance } from '../model/selectors';
 import { cn } from '@/shared/lib/utils';
 import balanceIcon from '@/shared/assets/items/Balance.svg';
 import { TokenIcon } from '@/shared/ui/token-icon';

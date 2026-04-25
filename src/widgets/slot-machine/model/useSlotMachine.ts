@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useAnimation } from 'framer-motion';
-import { useGameActions, useGameStatus } from '@/entities/game/model/selectors';
+import { useGameActions, useGameAudio, useGameStatus } from '@/entities/game';
 import { GAME_CONFIG } from '@/shared/config/gameConfig';
 import { SOUNDS } from '@/shared/lib/audio';
-import { useGameAudio } from '@/entities/game/lib/useGameAudio';
 import { GAME_STATUS } from '@/shared/types/game';
 
 export const useSlotMachine = () => {
@@ -88,7 +87,6 @@ export const useSlotMachine = () => {
       isMounted = false;
       if (timerId) clearTimeout(timerId);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, triggerLeverAnimation, playSound]);
 
   const handleReelStop = useCallback(() => {

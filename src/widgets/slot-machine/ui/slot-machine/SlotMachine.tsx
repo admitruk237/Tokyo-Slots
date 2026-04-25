@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useNextReels } from '@/entities/game/model/selectors';
+import { useNextReels } from '@/entities/game';
 import { GAME_CONFIG } from '@/shared/config/gameConfig';
 import ballIcon from '@/shared/assets/slot-machine/ball.svg';
 import machineSvg from '@/shared/assets/slot-machine/slot-machine.svg';

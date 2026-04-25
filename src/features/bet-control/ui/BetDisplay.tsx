@@ -4,7 +4,7 @@ import { cn } from '@/shared/lib/utils';
 import { useBetInput } from '../model/useBetInput';
 
 export const BetDisplay = () => {
-  const { inputValue, error, handleInputChange, isSpinning } = useBetInput();
+  const { inputValue, error, handleInputChange, handleBlur, isSpinning } = useBetInput();
 
   return (
     <div className="relative mx-[8px]">
@@ -47,6 +47,7 @@ export const BetDisplay = () => {
           type="text"
           value={inputValue}
           onChange={handleInputChange}
+          onBlur={handleBlur}
           disabled={isSpinning}
           className="bg-transparent font-poetsen text-white text-[20px] w-full focus:outline-none placeholder:text-white/50"
           placeholder="0.00"

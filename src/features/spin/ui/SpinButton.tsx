@@ -2,9 +2,9 @@ import {
   useBetStatus,
   useCanSpin,
   useGameActions,
+  useGameAudio,
   useIsSpinning,
-} from '@/entities/game/model/selectors';
-import { useGameAudio } from '@/entities/game/lib/useGameAudio';
+} from '@/entities/game';
 import { SOUNDS } from '@/shared/lib/audio';
 import { GameButton } from '@/shared/ui/game-button';
 

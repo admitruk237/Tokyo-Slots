@@ -24,16 +24,15 @@ const generateCoins = (): Coin[] =>
   }));
 
 export const CoinsRain = () => {
-  const coins = useMemo<Coin[]>(generateCoins, []);
+  const coins = useMemo<Coin[]>(() => generateCoins(), []);
 
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
       {coins.map((coin) => (
         <motion.div
           key={coin.id}
-          className="absolute -top-20"
-          style={{ left: `${coin.left}%` }}
-          initial={{ y: -100, opacity: 0, rotate: 0 }}
+          className="absolute -top-20 left-0"
+          initial={{ x: `${coin.left}vw`, y: -100, opacity: 0, rotate: 0 }}
           animate={{
             y: ['0vh', '110vh'],
             opacity: [0, 1, 1, 0.8],

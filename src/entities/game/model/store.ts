@@ -33,9 +33,9 @@ export const useGameStore = create<GameStore>()(
         },
 
         decrementBet: () => {
-          const { bet, balance } = get();
+          const { bet } = get();
           const nextBet = bet - GAME_CONFIG.BET.STEP;
-          if (nextBet >= GAME_CONFIG.BET.MIN && nextBet <= balance) {
+          if (nextBet >= GAME_CONFIG.BET.MIN) {
             set({ bet: Number(nextBet.toFixed(2)) });
           }
         },

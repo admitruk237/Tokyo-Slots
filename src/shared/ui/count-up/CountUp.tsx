@@ -5,13 +5,15 @@ export const CountUp = (props: CountUpProps) => {
   const countUpRef = useRef<HTMLElement>(null);
 
   const { update } = useCountUp({
-    ref: countUpRef as unknown as RefObject<HTMLElement>,
+    // react-countup types ref as RefObject<HTMLElement> (non-null), but it
+    // safely handles null at runtime — narrow the type without `unknown`.
+    ref: countUpRef as RefObject<HTMLElement>,
     start: props.start,
     end: props.end,
     duration: props.duration,
     decimals: props.decimals,
     separator: props.separator ?? '',
-    useGrouping: false,
+    useGrouping: props.useGrouping ?? false,
     decimal: props.decimal,
     prefix: props.prefix,
     suffix: props.suffix,
@@ -23,7 +25,7 @@ export const CountUp = (props: CountUpProps) => {
     update(props.end ?? 0);
   }, [props.end, update]);
 
-  return <span ref={countUpRef} className={props.className} style={props.style} />;
+  return <span ref={countUpRef} className={props.className} />;
 };
 
 export type { CountUpProps };

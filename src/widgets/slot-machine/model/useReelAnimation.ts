@@ -17,11 +17,20 @@ export const useReelAnimation = ({ targetSymbolId, isSpinning, delay, onStop }: 
   const wasSpinningRef = useRef(false);
 
   useEffect(() => {
+    let cancelled = false;
+    let timerId: ReturnType<typeof setTimeout> | null = null;
+
+    const wait = (ms: number) =>
+      new Promise<void>((resolve) => {
+        timerId = setTimeout(resolve, ms);
+      });
+
     if (isSpinning && targetSymbolId) {
       wasSpinningRef.current = true;
 
       const startAnimation = async () => {
-        await new Promise((resolve) => setTimeout(resolve, delay));
+        await wait(delay);
+        if (cancelled) return;
 
         await controls.start({
           y: [0, -500],
@@ -37,7 +46,8 @@ export const useReelAnimation = ({ targetSymbolId, isSpinning, delay, onStop }: 
       wasSpinningRef.current = false;
 
       const stopAnimation = async () => {
-        await new Promise((resolve) => setTimeout(resolve, delay));
+        await wait(delay);
+        if (cancelled) return;
 
         const target =
           GAME_CONFIG.SYMBOLS.find((s) => s.id === targetSymbolId) || GAME_CONFIG.SYMBOLS[0];
@@ -49,12 +59,18 @@ export const useReelAnimation = ({ targetSymbolId, isSpinning, delay, onStop }: 
             ease: 'easeOut',
           },
         });
+        if (cancelled) return;
 
         setCurrentSymbol(target);
-        if (onStop) onStop();
+        onStop?.();
       };
       stopAnimation();
     }
+
+    return () => {
+      cancelled = true;
+      if (timerId) clearTimeout(timerId);
+    };
   }, [isSpinning, targetSymbolId, delay, controls, onStop]);
 
   return {
