@@ -15,7 +15,8 @@ const REEL_CLASSES = [
 
 export const SlotMachine = () => {
   const nextReels = useNextReels();
-  const { leverControls, ballControls, reelsSpinning, handleReelStop } = useSlotMachine();
+  const { leverAnimate, ballAnimate, onLeverAnimationComplete, reelsSpinning, handleReelStop } =
+    useSlotMachine();
 
   return (
     <div className="relative flex items-center justify-center w-[337px] h-[200px] sm:w-[483px] sm:h-[297px]">
@@ -46,14 +47,15 @@ export const SlotMachine = () => {
 
           <div className="w-[27px] h-[55px] bg-machine-accent border-[3px] border-border-dark rounded-r-[10px] ml-[-3px] relative overflow-visible">
             <motion.div
-              animate={leverControls}
+              animate={leverAnimate}
               initial={{ rotateX: 0 }}
+              onAnimationComplete={onLeverAnimationComplete}
               className="absolute bottom-[20px] left-[9px] w-[9px] h-[69px] z-10 overflow-visible origin-bottom [transform-style:preserve-3d] [backface-visibility:hidden]"
             >
               <div className="absolute inset-0 bg-lever-shaft border-[3px] border-border-dark rounded-b-full shadow-inner [transform:translateZ(1px)]" />
 
               <motion.div
-                animate={ballControls}
+                animate={ballAnimate}
                 initial={{ rotateX: 0 }}
                 className="absolute -top-[26px] left-1/2 -translate-x-1/2 w-[33px] h-[33px]"
               >

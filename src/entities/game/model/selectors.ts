@@ -23,22 +23,15 @@ export const useBetStatus = () =>
     }))
   );
 
-export const useGameActions = () => {
-  const setBet = useGameStore((s) => s.setBet);
-  const incrementBet = useGameStore((s) => s.incrementBet);
-  const decrementBet = useGameStore((s) => s.decrementBet);
-  const startSpin = useGameStore((s) => s.startSpin);
-  const completeSpin = useGameStore((s) => s.completeSpin);
-  const toggleMute = useGameStore((s) => s.toggleMute);
-  const resetStatus = useGameStore((s) => s.resetStatus);
-
-  return {
-    setBet,
-    incrementBet,
-    decrementBet,
-    startSpin,
-    completeSpin,
-    toggleMute,
-    resetStatus,
-  };
-};
+export const useGameActions = () =>
+  useGameStore(
+    useShallow((s) => ({
+      setBet: s.setBet,
+      incrementBet: s.incrementBet,
+      decrementBet: s.decrementBet,
+      startSpin: s.startSpin,
+      completeSpin: s.completeSpin,
+      toggleMute: s.toggleMute,
+      resetStatus: s.resetStatus,
+    }))
+  );

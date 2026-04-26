@@ -5,11 +5,11 @@ export interface GameSymbol<T extends string = string> {
   multiplier: number;
 }
 
-export type GameStatus = 'idle' | 'spinning' | 'win' | 'lose';
-
 export const GAME_STATUS = {
   IDLE: 'idle',
   SPINNING: 'spinning',
   WIN: 'win',
   LOSE: 'lose',
 } as const;
+
+export type GameStatus = (typeof GAME_STATUS)[keyof typeof GAME_STATUS];

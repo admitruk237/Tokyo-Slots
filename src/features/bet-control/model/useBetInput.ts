@@ -38,13 +38,11 @@ export const useBetInput = () => {
 
     if (rawVal !== '' && !/^\d*\.?\d*$/.test(rawVal)) {
       setError('Invalid format');
-      setBet(0);
       return;
     }
 
     if (rawVal === '' || rawVal === '.') {
       setError('Enter amount');
-      setBet(0);
       return;
     }
 
@@ -57,7 +55,6 @@ export const useBetInput = () => {
 
     if (parsed < GAME_CONFIG.BET.MIN) {
       setError(`Min bet is ${GAME_CONFIG.BET.MIN}`);
-      setBet(0);
       return;
     }
 

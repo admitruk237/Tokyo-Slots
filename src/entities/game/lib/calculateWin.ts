@@ -6,13 +6,8 @@ export const calculateWin = (
   bet: number,
   symbols: readonly GameSymbol[]
 ) => {
-  const counts = reels.reduce<Record<string, number>>(
-    (acc, id) => ({
-      ...acc,
-      [id]: (acc[id] || 0) + 1,
-    }),
-    {}
-  );
+  const counts: Record<string, number> = {};
+  for (const id of reels) counts[id] = (counts[id] || 0) + 1;
 
   const entries = Object.entries(counts);
 
