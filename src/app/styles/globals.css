@@ -1,1 +1,150 @@
 @import 'tailwindcss';
+
+@theme {
+  /* ── Backgrounds ── */
+  --color-bg-idle-from: #daf3a6;
+  --color-bg-idle-to: #d4e8a0;
+  --color-bg-win-from: #d4f1f9;
+  --color-bg-win-to: #a8e6f0;
+  --color-bg-lose-from: #f5d0a9;
+  --color-bg-lose-to: #e8b88a;
+  --color-slot-machine-bg: #f6f6f6;
+
+  /* ── Accent ── */
+  --color-accent-orange: #f7931e;
+  --color-accent-red: #ef4444;
+
+  /* ── Borders & Shadows ── */
+  --color-border-dark: #341d1a;
+  --color-border-dark-shadow: #271613;
+
+  /* ── Spin button ── */
+  --color-spin-from: #ef4444;
+  --color-spin-to: #f7931e;
+  --color-spin-shadow: #b91c1c;
+  --color-spin-border-bg: #ab1c34;
+  --color-spin-text-stroke: rgba(120, 0, 15, 0.7);
+
+  /* ── Bet field ── */
+  --color-bet-bg: #f7931e;
+  --color-bet-input-bg: #887c7b;
+
+  /* ── Jackpot bar ── */
+  --color-jackpot-bg: #3d2010;
+  --color-jackpot-text: #ffc434;
+
+  /* ── Title plate ── */
+  --color-title-bg: #5a3520;
+  --color-title-text: #ffc434;
+  --color-balance-shadow: #251a11;
+
+  /* ── Slot machine ── */
+  --color-reel-border: #7ec8e3;
+  --color-reel-bg: #f0faff;
+  --color-machine-body: #8fd3f4;
+  --color-machine-border: #5bb8d4;
+  --color-machine-accent: #0076cc;
+  --color-lever-shaft: #9cdefa;
+
+  /* ── Popup ── */
+  --color-win-amount: #22c55e;
+  --color-lose-amount: #ef4444;
+
+  /* ── Fonts ── */
+  --font-poetsen: 'Poetsen One', sans-serif;
+
+  /* ── Text ── */
+  --color-text-muted: #7a8a5a;
+  --color-text-white: #ffffff;
+
+  /* ── UI Buttons (± , nav) ── */
+  --color-btn-dark-bg: #2d2010;
+  --color-btn-dark-border: #4a3020;
+  --color-btn-nav-bg: #f7931e;
+  --color-btn-nav-border: #d4761a;
+  --color-btn-nav-shadow: #a05510;
+  --color-btn-square-shadow: #515895;
+  --color-btn-disabled: #969595;
+
+  /* ── Balance ── */
+  --color-balance-bg: #341d1a;
+  --color-balance-circle: #f7405e;
+  --color-balance-circle-text: #691010;
+
+  /* ── Win Visuals ── */
+  --color-win-title: #54c3ee;
+  --color-win-overlay-bg: #a5dff7;
+  --color-win-icon-shadow: #271613;
+
+  /* ── Lose Visuals ── */
+  --color-lose-overlay-bg: #ba562b;
+  --color-lose-title: #ff0000;
+
+  /* ── Header ── */
+  --color-header-bg: #fff6de;
+}
+
+@utility text-title-outline {
+  -webkit-text-stroke: 8px var(--color-balance-shadow);
+  paint-order: stroke fill;
+  /* Centered shadows to create a thick uniform border/outline effect */
+  text-shadow:
+    0 0 2px var(--color-balance-shadow),
+    0 0 5px var(--color-balance-shadow);
+}
+
+@utility clip-balance {
+  clip-path: path(
+    'M 80,0 L 330,0 Q 360,0 371,28 L 399,95 Q 410,123 380,123 L 30,123 Q 0,123 11,95 L 39,28 Q 50,0 80,0 Z'
+  );
+}
+
+@utility wave-bottom {
+  -webkit-mask:
+    linear-gradient(-45deg, #000 10px, #0000 0) 0 100% / 20px 20px,
+    linear-gradient(45deg, #000 10px, #0000 0) 0 100% / 20px 20px,
+    linear-gradient(#000 0 0) 0 0 / 100% calc(100% - 10px) no-repeat;
+  mask:
+    linear-gradient(-45deg, #000 10px, #0000 0) 0 100% / 20px 20px,
+    linear-gradient(45deg, #000 10px, #0000 0) 0 100% / 20px 20px,
+    linear-gradient(#000 0 0) 0 0 / 100% calc(100% - 10px) no-repeat;
+}
+@utility text-3d-title {
+  -webkit-text-stroke: 6px var(--color-balance-shadow);
+  paint-order: stroke fill;
+
+  text-shadow:
+    0 4px 0 var(--color-balance-shadow),
+    0 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+@utility bg-win-overlay {
+  background-color: var(--color-win-overlay-bg);
+  opacity: 0.8;
+}
+
+@utility bg-lose-overlay {
+  background-color: var(--color-lose-overlay-bg);
+  opacity: 0.8;
+}
+
+@utility bg-win-sunburst {
+  background: repeating-conic-gradient(
+    from 0deg,
+    transparent 0deg 10deg,
+    rgba(255, 255, 255, 0.15) 10deg 20deg
+  );
+}
+
+@utility shadow-win-icon {
+  box-shadow: 0 2px 0 var(--color-win-icon-shadow);
+}
+
+@utility text-stroke-muted {
+  -webkit-text-stroke: 5px rgba(0, 0, 0, 0.45);
+  paint-order: stroke fill;
+}
+
+@utility text-stroke-shadow {
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.6));
+}

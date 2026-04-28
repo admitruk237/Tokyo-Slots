@@ -1,73 +1,93 @@
-# React + TypeScript + Vite
+# 🎰 Tokyo Slots
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A browser-based slot machine game built with React and TypeScript.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Demo
 
-## React Compiler
+![Tokyo Slots Demo](./public/demo.gif)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- 4-reel slot machine with 6 weighted symbols and multipliers up to ×500
+- Lever pull animation + sequential reel spin with sound effects
+- Win / Lose overlays with animated CountUp and auto-dismiss
+- Bet input with live validation, min/max limits and error bubbles
+- Balance and settings (bet, mute) persisted via `localStorage`
+- Mute toggle
+- Fully responsive — works on mobile and desktop
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+|                       |                  |
+| --------------------- | ---------------- |
+| React 19              | UI               |
+| TypeScript 6 (strict) | Type safety      |
+| Zustand 5             | State management |
+| Framer Motion 12      | Animations       |
+| Tailwind CSS 4        | Styling          |
+| Vite 8                | Build tool       |
+| Vitest                | Unit tests       |
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+Architecture follows **Feature-Sliced Design (FSD)**.
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm
+
+### Installation
+
+```bash
+git clone https://github.com/admitruk237/Tokyo-Slots.git
+cd tokyo-slots
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```bash
+npm run dev
 ```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+### Build
+
+```bash
+npm run build
+```
+
+### Tests
+
+```bash
+npm run test
+```
+
+---
+
+## Game Rules
+
+| Combination   | Payout                          |
+| ------------- | ------------------------------- |
+| 4 of a kind   | `bet × symbol multiplier`       |
+| 3 of a kind   | `bet × symbol multiplier × 0.5` |
+| Anything else | `0`                             |
+
+### Symbols
+
+| Symbol    | Multiplier | Frequency   |
+| --------- | ---------- | ----------- |
+| 7️⃣ Seven  | ×500       | Rare        |
+| ⛩️ Torii  | ×100       | Uncommon    |
+| 🐱 Maneki | ×50        | Uncommon    |
+| 🔔 Bell   | ×20        | Common      |
+| 🍒 Cherry | ×10        | Common      |
+| 🌸 Sakura | ×5         | Most common |
