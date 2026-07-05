@@ -58,6 +58,11 @@ export const useBetInput = () => {
       return;
     }
 
+    if (parsed > GAME_CONFIG.BET.MAX) {
+      setError(`Max bet is ${GAME_CONFIG.BET.MAX}`);
+      return;
+    }
+
     setError(null);
     setBet(parsed);
   };
@@ -66,6 +71,8 @@ export const useBetInput = () => {
     const parsed = parseFloat(inputValue);
     if (isNaN(parsed) || parsed < GAME_CONFIG.BET.MIN) {
       setBet(GAME_CONFIG.BET.MIN);
+    } else if (parsed > GAME_CONFIG.BET.MAX) {
+      setBet(GAME_CONFIG.BET.MAX);
     }
   };
 
