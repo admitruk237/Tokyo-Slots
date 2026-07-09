@@ -1,8 +1,7 @@
 import { cn } from '@/shared/lib/utils';
 import { motion } from 'framer-motion';
 import { useReelAnimation } from '../../model/useReelAnimation';
-
-import type { SymbolId } from '@/shared/config/gameConfig';
+import type { SymbolId } from '@/entities/game';
 
 interface Props {
   targetSymbolId?: SymbolId;
@@ -26,7 +25,7 @@ export const SlotReel = (props: Props) => {
         <span className="text-5xl select-none">{currentSymbol.label}</span>
       </motion.div>
 
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-white/20 to-transparent rounded-[8px]" />
+      <div className="absolute inset-0 pointer-events-none bg-linear-to-b from-white/20 to-transparent rounded-[8px]" />
     </div>
   );
 };

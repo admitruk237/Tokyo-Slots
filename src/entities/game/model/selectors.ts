@@ -1,6 +1,6 @@
 import { useShallow } from 'zustand/react/shallow';
 import { useGameStore } from './store';
-import { GAME_STATUS } from '@/shared/types/game';
+import { GAME_STATUS } from './types';
 
 export const useBalance = () => useGameStore((s) => s.balance);
 export const useBet = () => useGameStore((s) => s.bet);
@@ -14,14 +14,6 @@ export const useIsSpinning = () => useGameStore((s) => s.status === GAME_STATUS.
 
 export const useCanSpin = () =>
   useGameStore((s) => s.balance >= s.bet && s.bet > 0 && s.status !== GAME_STATUS.SPINNING);
-
-export const useBetStatus = () =>
-  useGameStore(
-    useShallow((s) => ({
-      isAffordable: s.balance >= s.bet,
-      hasValidBet: s.bet > 0,
-    }))
-  );
 
 export const useGameActions = () =>
   useGameStore(

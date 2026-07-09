@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
-import { GAME_CONFIG } from '@/shared/config/gameConfig';
-import type { GameStatus } from '@/shared/types/game';
-import { useGameActions, useGameStatus } from '@/entities/game';
+import { GAME_CONFIG, type GameStatus, useGameActions, useGameStatus } from '@/entities/game';
 
 export const useAutoDismiss = (
   targetStatus: GameStatus,

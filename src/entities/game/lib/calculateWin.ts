@@ -1,5 +1,8 @@
-import type { SymbolId } from '@/shared/config/gameConfig';
-import type { GameSymbol } from '@/shared/types/game';
+import type { SymbolId } from '../model/gameConfig';
+import type { GameSymbol } from '../model/types';
+import { roundMoney } from '@/shared/lib/roundMoney';
+
+const MATCH_FACTOR: Record<number, number> = { 4: 1, 3: 0.5 };
 
 export const calculateWin = (
   reels: readonly SymbolId[],
@@ -11,19 +14,12 @@ export const calculateWin = (
 
   const entries = Object.entries(counts);
 
-  const fourOfAKind = entries.find(([, count]) => count === 4);
-  if (fourOfAKind) {
-    const symbol = symbols.find((s) => s.id === fourOfAKind[0]);
-    const multiplier = symbol?.multiplier ?? 0;
-    return { winAmount: Number((bet * multiplier).toFixed(2)), multiplier };
-  }
+  const match = entries.find(([, count]) => MATCH_FACTOR[count] !== undefined);
+  if (!match) return { winAmount: 0, multiplier: 0 };
 
-  const threeOfAKind = entries.find(([, count]) => count === 3);
-  if (threeOfAKind) {
-    const symbol = symbols.find((s) => s.id === threeOfAKind[0]);
-    const multiplier = (symbol?.multiplier ?? 0) * 0.5;
-    return { winAmount: Number((bet * multiplier).toFixed(2)), multiplier };
-  }
+  const [matchId, matchCount] = match;
+  const symbol = symbols.find((s) => s.id === matchId);
+  const multiplier = (symbol?.multiplier ?? 0) * MATCH_FACTOR[matchCount];
 
-  return { winAmount: 0, multiplier: 0 };
+  return { winAmount: roundMoney(bet * multiplier), multiplier };
 };

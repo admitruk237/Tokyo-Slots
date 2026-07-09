@@ -1,8 +1,7 @@
-import type { GameSymbol } from '@/shared/types/game';
+import type { GameSymbol } from './types';
 
 export const GAME_CONFIG = {
   INITIAL_BALANCE: 999999.99,
-  INITIAL_JACKPOT: 10000.0,
 
   BET: {
     MIN: 100,

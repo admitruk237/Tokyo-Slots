@@ -1,7 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
-import { useBalance, useBet, useGameActions, useGameStatus, useGameStore } from '@/entities/game';
-import { GAME_STATUS } from '@/shared/types/game';
-import { GAME_CONFIG } from '@/shared/config/gameConfig';
+import { type ChangeEvent, useState } from 'react';
+import {
+  GAME_CONFIG,
+  GAME_STATUS,
+  useBalance,
+  useBet,
+  useGameActions,
+  useGameStatus,
+} from '@/entities/game';
+import { BET_ERRORS } from './constants';
 
 export const useBetInput = () => {
   const bet = useBet();
@@ -11,50 +17,41 @@ export const useBetInput = () => {
 
   const [inputValue, setInputValue] = useState<string>(bet.toString());
   const [error, setError] = useState<string | null>(null);
+  const [prevBet, setPrevBet] = useState(bet);
 
-  const inputRef = useRef(inputValue);
-
-  useEffect(() => {
-    inputRef.current = inputValue;
-  }, [inputValue]);
+  if (bet !== prevBet) {
+    setPrevBet(bet);
+    if (bet !== parseFloat(inputValue)) {
+      setInputValue(bet.toString());
+      setError(null);
+    }
+  }
 
   const isSpinning = status === GAME_STATUS.SPINNING;
 
-  useEffect(() => {
-    return useGameStore.subscribe(
-      (state) => state.bet,
-      (newBet) => {
-        if (newBet !== parseFloat(inputRef.current)) {
-          setInputValue(newBet.toString());
-          setError(null);
-        }
-      }
-    );
-  }, []);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const rawVal = e.target.value;
     setInputValue(rawVal);
 
     if (rawVal !== '' && !/^\d*\.?\d*$/.test(rawVal)) {
-      setError('Invalid format');
+      setError(BET_ERRORS.INVALID_FORMAT);
       return;
     }
 
     if (rawVal === '' || rawVal === '.') {
-      setError('Enter amount');
+      setError(BET_ERRORS.ENTER_AMOUNT);
       return;
     }
 
     const parsed = parseFloat(rawVal);
 
     if (parsed > balance) {
-      setError('Insufficient funds');
+      setError(BET_ERRORS.INSUFFICIENT_FUNDS);
       return;
     }
 
     if (parsed < GAME_CONFIG.BET.MIN) {
-      setError(`Min bet is ${GAME_CONFIG.BET.MIN}`);
+      setError(BET_ERRORS.MIN_BET(GAME_CONFIG.BET.MIN));
       return;
     }
 

@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useAnimation } from 'framer-motion';
-import { GAME_CONFIG, type SymbolId } from '@/shared/config/gameConfig';
-import type { GameSymbol } from '@/shared/types/game';
+import { GAME_CONFIG, type GameSymbol, type SymbolId } from '@/entities/game';
 
 interface Props {
   targetSymbolId?: SymbolId;

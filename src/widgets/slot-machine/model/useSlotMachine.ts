@@ -1,8 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useGameActions, useGameAudio, useGameStatus } from '@/entities/game';
-import { GAME_CONFIG } from '@/shared/config/gameConfig';
+import {
+  GAME_CONFIG,
+  GAME_STATUS,
+  useGameActions,
+  useGameAudio,
+  useGameStatus,
+} from '@/entities/game';
 import { SOUNDS } from '@/shared/lib/audio';
-import { GAME_STATUS } from '@/shared/types/game';
 import { useLeverAnimation } from './useLeverAnimation';
 
 export const useSlotMachine = () => {
@@ -44,7 +48,7 @@ export const useSlotMachine = () => {
   }, [status, triggerLever, playSound]);
 
   useEffect(() => {
-    if (stoppedCount === GAME_CONFIG.REELS_COUNT && stoppedCount > 0) {
+    if (stoppedCount === GAME_CONFIG.REELS_COUNT) {
       stopSound(SOUNDS.SPIN);
       completeSpin();
     }

@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { TokenIcon } from '@/shared/ui/token-icon';
 import { cn } from '@/shared/lib/utils';
 import { useBetInput } from '../model/useBetInput';
+import { BET_LABELS } from '../model/constants';
 
 export const BetDisplay = () => {
   const { inputValue, error, handleInputChange, handleBlur, isSpinning } = useBetInput();
@@ -50,7 +51,7 @@ export const BetDisplay = () => {
           onBlur={handleBlur}
           disabled={isSpinning}
           className="bg-transparent font-poetsen text-white text-[20px] w-full focus:outline-none placeholder:text-white/50"
-          placeholder="0.00"
+          placeholder={BET_LABELS.AMOUNT_PLACEHOLDER}
         />
       </div>
     </div>
