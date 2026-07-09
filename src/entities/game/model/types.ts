@@ -1,5 +1,20 @@
-import type { SymbolId } from '@/shared/config/gameConfig';
-import type { GameStatus } from '@/shared/types/game';
+import type { SymbolId } from './gameConfig';
+
+export interface GameSymbol<T extends string = string> {
+  id: T;
+  label: string;
+  weight: number;
+  multiplier: number;
+}
+
+export const GAME_STATUS = {
+  IDLE: 'idle',
+  SPINNING: 'spinning',
+  WIN: 'win',
+  LOSE: 'lose',
+} as const;
+
+export type GameStatus = (typeof GAME_STATUS)[keyof typeof GAME_STATUS];
 
 export interface GameState {
   balance: number;
@@ -21,4 +36,4 @@ export interface GameActions {
   resetStatus: () => void;
 }
 
-export interface GameStore extends GameState, GameActions {}
+export type GameStore = GameState & GameActions;

@@ -3,6 +3,7 @@ import { SquareButton } from '@/shared/ui/square-button';
 import { StrokeText } from '@/shared/ui/stroke-text';
 import { SOUNDS } from '@/shared/lib/audio';
 import { BetDisplay } from './BetDisplay';
+import { BET_LABELS } from '../model/constants';
 
 export const BetControl = () => {
   const { incrementBet, decrementBet } = useGameActions();
@@ -21,7 +22,9 @@ export const BetControl = () => {
 
   return (
     <form onSubmit={(e) => e.preventDefault()} className="flex flex-col items-center">
-      <StrokeText className="font-poetsen text-sm text-win-title">Place a bid</StrokeText>
+      <StrokeText className="font-poetsen text-sm text-win-title">
+        {BET_LABELS.PLACE_A_BID}
+      </StrokeText>
 
       <div className="mt-[20px] flex items-center">
         <SquareButton onClick={handleDecrement} disabled={isSpinning}>

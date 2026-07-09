@@ -1,4 +1,4 @@
-import type { GameSymbol } from '@/shared/types/game';
+import type { GameSymbol } from '../model/types';
 
 export const pickSymbol = <T extends string>(
   symbols: readonly GameSymbol<T>[],

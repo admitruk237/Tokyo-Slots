@@ -1,1 +1,0 @@
-export { GameBackground } from './GameBackground';

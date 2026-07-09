@@ -1,10 +1,11 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useIntroStore } from '../model/intro-store';
+import { useIntroStore } from '../model/introStore';
 import { CoinsRain } from './CoinsRain';
 import { CityRise } from './CityRise';
 import { CloudPuff } from './CloudPuff';
 import { IntroTitle } from './IntroTitle';
 import { GameButton } from '@/shared/ui/game-button';
+import { INTRO_LABELS } from '../model/constants';
 
 export const Intro = () => {
   const isIntroVisible = useIntroStore((state) => state.isIntroVisible);
@@ -36,7 +37,7 @@ export const Intro = () => {
               buttonClassName="scale-100 sm:scale-[1.28]"
               textClassName="text-[40px]"
             >
-              Play
+              {INTRO_LABELS.PLAY}
             </GameButton>
           </motion.div>
         </motion.div>

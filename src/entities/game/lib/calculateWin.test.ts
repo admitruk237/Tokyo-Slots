@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { calculateWin } from './calculateWin';
-import { GAME_CONFIG } from '@/shared/config/gameConfig';
+import { GAME_CONFIG } from '../model/gameConfig';
 
 describe('calculateWin', () => {
   const symbols = GAME_CONFIG.SYMBOLS;

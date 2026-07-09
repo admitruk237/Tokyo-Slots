@@ -4,6 +4,8 @@ import { cn } from '@/shared/lib/utils';
 import balanceIcon from '@/shared/assets/items/Balance.svg';
 import { TokenIcon } from '@/shared/ui/token-icon';
 
+const BALANCE_COUNT_DURATION = 0.4;
+
 export const BalanceDisplay = () => {
   const balance = useBalance();
 
@@ -29,7 +31,12 @@ export const BalanceDisplay = () => {
             <TokenIcon />
 
             <span className="text-3xl text-white font-poetsen text-title-outline leading-none mt-1">
-              <CountUp end={whole} duration={0.4} decimals={0} useGrouping={false} />
+              <CountUp
+                end={whole}
+                duration={BALANCE_COUNT_DURATION}
+                decimals={0}
+                useGrouping={false}
+              />
               <span className="opacity-50 ml-1">.{decimal}</span>
             </span>
           </div>

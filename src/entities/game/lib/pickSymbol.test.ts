@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { pickSymbol } from './pickSymbol';
-import type { GameSymbol } from '@/shared/types/game';
+import type { GameSymbol } from '../model/types';
 
 describe('pickSymbol', () => {
   const mockSymbols: GameSymbol[] = [

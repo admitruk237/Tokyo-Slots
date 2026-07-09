@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
-import { useNextReels } from '@/entities/game';
-import { GAME_CONFIG } from '@/shared/config/gameConfig';
+import { GAME_CONFIG, useNextReels } from '@/entities/game';
 import ballIcon from '@/shared/assets/slot-machine/ball.svg';
 import machineSvg from '@/shared/assets/slot-machine/slot-machine.svg';
 import { useSlotMachine } from '../../model/useSlotMachine';
@@ -28,18 +27,16 @@ export const SlotMachine = () => {
         />
 
         <div className="absolute inset-0 z-10 pointer-events-none">
-          {Array(GAME_CONFIG.REELS_COUNT)
-            .fill(null)
-            .map((_, i) => (
-              <SlotReel
-                key={i}
-                className={REEL_CLASSES[i]}
-                isSpinning={reelsSpinning}
-                targetSymbolId={nextReels?.[i]}
-                delay={i * GAME_CONFIG.ANIMATION.REEL_DELAY}
-                onStop={handleReelStop}
-              />
-            ))}
+          {REEL_CLASSES.map((positionClass, i) => (
+            <SlotReel
+              key={positionClass}
+              className={positionClass}
+              isSpinning={reelsSpinning}
+              targetSymbolId={nextReels?.[i]}
+              delay={i * GAME_CONFIG.ANIMATION.REEL_DELAY}
+              onStop={handleReelStop}
+            />
+          ))}
         </div>
 
         <div className="absolute left-[450px] top-[147px] -translate-y-1/2 flex items-center z-20 select-none [perspective:1400px] [perspective-origin:center]">

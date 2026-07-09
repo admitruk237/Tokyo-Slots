@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { APP_NAME } from '@/shared/config/appConfig';
 
 export const IntroTitle = () => {
   return (
@@ -9,7 +10,7 @@ export const IntroTitle = () => {
       transition={{ duration: 0.8, delay: 1.2, type: 'spring', bounce: 0.5 }}
     >
       <h1 className="text-title-outline tracking-[5px] font-poetsen font-bold text-5xl sm:text-7xl text-win-overlay-bg whitespace-nowrap italic">
-        Tokyo Slots
+        {APP_NAME}
       </h1>
     </motion.div>
   );

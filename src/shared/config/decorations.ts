@@ -17,17 +17,6 @@ export interface DecorationItem {
   delay: number;
 }
 
-export const DECOR_IMAGES = [
-  leaf1,
-  leaf2,
-  leaf3,
-  sevenIcon,
-  cherryIcon,
-  lemonIcon,
-  crownIcon,
-  crystalIcon,
-];
-
 export const DECORATIONS: DecorationItem[] = [
   { id: 1, src: leaf1, x: 5, y: 30, sizeClass: 'w-16 h-16', rotation: 15, delay: 0 },
   { id: 2, src: cherryIcon, x: 15, y: 45, sizeClass: 'w-14 h-14', rotation: -10, delay: 0.5 },
